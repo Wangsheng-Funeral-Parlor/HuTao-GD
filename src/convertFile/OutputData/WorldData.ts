@@ -1,4 +1,5 @@
 import WorldExcelConfig from '#/ExcelBinOutput/WorldExcelConfig'
+import WorldLevelExcelConfig from '#/ExcelBinOutput/WorldLevelExcelConfig'
 import WorldDataGroup from '#/types/WorldData'
 import Writer from './writer'
 
@@ -18,18 +19,30 @@ export class WorldDataWriter extends Writer {
     const { version, data } = this
 
     const worldExcelConfigLoader = WorldExcelConfig(version)
+    const worldLevelExcelConfigLoader = WorldLevelExcelConfig(version)
 
     await worldExcelConfigLoader.load()
+    await worldLevelExcelConfigLoader.load()
 
-    const { data: worldConfig } = worldExcelConfigLoader
+    const { data: worldExcelConfig } = worldExcelConfigLoader
+    const { data: worldLevelExcelConfig } = worldLevelExcelConfigLoader
 
-    for (let world of worldConfig) {
+    for (let world of worldExcelConfig) {
       const { Id, Type, MainSceneId } = world
 
       data.World.push({
         Id,
         Type,
         MainSceneId
+      })
+    }
+
+    for (let worldLevel of worldLevelExcelConfig) {
+      const { Level, MonsterLevel } = worldLevel
+
+      data.Level.push({
+        Level,
+        MonsterLevel
       })
     }
   }
