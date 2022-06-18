@@ -1,0 +1,82 @@
+import ScenePoint from '#/BinOutput/ScenePoint'
+import CityConfig from '#/ExcelBinOutput/CityConfig'
+import SceneExcelConfig from '#/ExcelBinOutput/SceneExcelConfig'
+import SceneTagConfig from '#/ExcelBinOutput/SceneTagConfig'
+import Scene from '#/Script/Scene'
+import SceneDataList from '#/types/SceneData'
+import Writer from './writer'
+
+export class SceneDataWriter extends Writer {
+  declare data: SceneDataList
+
+  constructor(ver: string) {
+    super('SceneData', ver)
+  }
+
+  async generateData(): Promise<void> {
+    this.data = []
+
+    const { version, data } = this
+
+    const sceneExcelConfigLoader = SceneExcelConfig(version)
+    const cityConfigLoader = CityConfig(version)
+    const sceneTagConfigLoader = SceneTagConfig(version)
+    const scenePointLoader = ScenePoint(version)
+    const sceneScriptLoader = Scene(version)
+
+    await sceneExcelConfigLoader.load()
+    await cityConfigLoader.load()
+    await sceneTagConfigLoader.load()
+    await scenePointLoader.loadDir()
+    await sceneScriptLoader.loadDir()
+
+    const { data: sceneExcelConfig } = sceneExcelConfigLoader
+    const { data: cityConfig } = cityConfigLoader
+    const { data: sceneTagConfig } = sceneTagConfigLoader
+    const { data: scenePointConfig } = scenePointLoader
+    const { data: sceneScript } = sceneScriptLoader
+
+    for (let scene of sceneExcelConfig) {
+      const { Id, Type, SpecifiedAvatarList, MaxSpecifiedAvatarNum, IsMainScene, IsLocked } = scene
+
+      if (sceneScript[Id] == null) continue
+
+      const { Config, Group, Block } = sceneScript[Id]
+      const { BeginPos, Size, BornPos, BornRot, DieY, VisionAnchor } = Config
+
+      data.push({
+        Id,
+        Type,
+        IsMainScene,
+        IsLocked,
+        BeginPos,
+        Size,
+        BornPos,
+        BornRot,
+        DieY,
+        VisionAnchor,
+        SpecifiedAvatarList: SpecifiedAvatarList || [],
+        MaxSpecifiedAvatarNum: MaxSpecifiedAvatarNum || -1,
+        City: cityConfig.map(city => ({
+          Id: city.CityId,
+          AreaIdVec: city.AreaIdVec,
+          MapPosX: city.MapPosX,
+          MapPosY: city.MapPosY,
+          AdventurePointId: city.AdventurePointId,
+          OpenState: city.OpenState
+        })),
+        ScenePoint: scenePointConfig[Id],
+        Tag: sceneTagConfig.filter(tag => tag.SceneId === Id).map(tag => ({
+          Id: tag.Id,
+          Name: tag.SceneTagName,
+          Cond: tag.Cond.filter(cond => cond.CondType != null) as { CondType: string, Param1?: number, Param2?: number }[],
+          IsDefaultValid: !!tag.IsDefaultValid
+        })),
+        Group: Group,
+        Block: Block
+      })
+    }
+  }
+}
+
+export default (ver: string) => new SceneDataWriter(ver)
