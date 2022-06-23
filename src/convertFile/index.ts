@@ -14,6 +14,8 @@ import WeaponData from './OutputData/WeaponData'
 import WorldData from './OutputData/WorldData'
 
 export default async (ver: string) => {
+  const filter = parseInt(process.argv.find(arg => arg.indexOf('-filter:') === 0)?.split(':')[1])
+
   if (!existsSync(`InputData/${ver}`)) {
     console.log('Missing input data.')
     return
@@ -34,6 +36,11 @@ export default async (ver: string) => {
     WeaponData,
     WorldData
   ]
+
+  if (!isNaN(filter)) {
+    writerFactoryList.splice(0, filter)
+    writerFactoryList.splice(1)
+  }
 
   for (let writerFactory of writerFactoryList) {
     const writer = writerFactory(ver)

@@ -1,6 +1,18 @@
 import luaparse from 'luaparse'
 import { waitTick } from './asyncWait'
 
+function isLuaArray(obj: any): boolean {
+  const keys = Object.keys(obj || {}).map(k => parseInt(k)).sort((a, b) => a - b)
+  const len = keys.length
+
+  for (let i = 0; i < len; i++) {
+    const k = keys[i]
+    if (isNaN(k) || k !== i + 1) return false
+  }
+
+  return true
+}
+
 export interface LuaObject {
   type: string
 }
@@ -277,10 +289,11 @@ export class Variable {
   export() {
     const value = this.get()
     if (value == null || typeof value !== 'object') return value
-    return Object.fromEntries(
+    const obj = Object.fromEntries(
       Object.entries(value as { [key: string | number]: Variable })
         .map(e => [e[0], e[1].export()])
     )
+    return isLuaArray(obj) ? Object.values(obj) : obj
   }
 }
 

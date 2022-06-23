@@ -26,7 +26,7 @@ function deobfuscateString(str: string, map: ObfuscateMap, unknown: string[] = [
 }
 
 let counter = 0
-export default async function deobfuscate(data: any, map: ObfuscateMap, unknown: string[] = []) {
+export default async function deobfuscate(data: any, map: ObfuscateMap, unknown: string[] = []): Promise<any> {
   if (counter++ % 1250 === 0) await waitTick()
 
   const isArray = Array.isArray(data)
