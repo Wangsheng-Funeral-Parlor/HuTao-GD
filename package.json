@@ -5,7 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && tsc-alias"
+    "build": "tsc --incremental && tsc-alias"
   },
   "author": "NotArandomGUY",
   "license": "ISC",

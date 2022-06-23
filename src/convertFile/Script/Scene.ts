@@ -37,6 +37,12 @@ export class SceneReader extends Reader {
             .map(e => {
               const groupId = parseInt(e[0].replace(`scene${sceneId}_group`, ''))
               const groupData = e[1]
+
+              for (let key in groupData) {
+                if (key === 'InitConfig') continue
+                groupData[key] = Object.values(groupData[key] || {})
+              }
+
               return [groupId, groupData]
             })
         ),
