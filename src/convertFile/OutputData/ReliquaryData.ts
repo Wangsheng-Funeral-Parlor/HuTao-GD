@@ -2,6 +2,7 @@ import ReliquaryAffixExcelConfig from '#/ExcelBinOutput/ReliquaryAffixExcelConfi
 import ReliquaryExcelConfig from '#/ExcelBinOutput/ReliquaryExcelConfig'
 import ReliquaryLevelExcelConfig from '#/ExcelBinOutput/ReliquaryLevelExcelConfig'
 import ReliquaryMainPropExcelConfig from '#/ExcelBinOutput/ReliquaryMainPropExcelConfig'
+import ReliquarySetExcelConfig from '#/ExcelBinOutput/ReliquarySetExcelConfig'
 import ReliquaryDataGroup from '#/types/ReliquaryData'
 import Writer from './writer'
 
@@ -17,7 +18,8 @@ export class ReliquaryDataWriter extends Writer {
       Reliquary: [],
       MainProp: [],
       Affix: [],
-      Level: []
+      Level: [],
+      Set: []
     }
 
     const { data, version } = this
@@ -26,16 +28,19 @@ export class ReliquaryDataWriter extends Writer {
     const reliquaryMainPropExcelConfigLoader = ReliquaryMainPropExcelConfig(version)
     const reliquaryAffixExcelConfigLoader = ReliquaryAffixExcelConfig(version)
     const reliquaryLevelExcelConfigLoader = ReliquaryLevelExcelConfig(version)
+    const reliquarySetExcelConfigLoader = ReliquarySetExcelConfig(version)
 
     await reliquaryExcelConfigLoader.load()
     await reliquaryMainPropExcelConfigLoader.load()
     await reliquaryAffixExcelConfigLoader.load()
     await reliquaryLevelExcelConfigLoader.load()
+    await reliquarySetExcelConfigLoader.load()
 
     const { data: reliquaryExcelConfig } = reliquaryExcelConfigLoader
     const { data: reliquaryMainPropExcelConfig } = reliquaryMainPropExcelConfigLoader
     const { data: reliquaryAffixExcelConfig } = reliquaryAffixExcelConfigLoader
     const { data: reliquaryLevelExcelConfig } = reliquaryLevelExcelConfigLoader
+    const { data: reliquarySetExcelConfig } = reliquarySetExcelConfigLoader
 
     for (let reliquary of reliquaryExcelConfig) {
       const {
@@ -134,6 +139,24 @@ export class ReliquaryDataWriter extends Writer {
 
         Rank,
         Exp
+      })
+    }
+
+    for (let reliquarySet of reliquarySetExcelConfig) {
+      const {
+        SetId,
+        SetNeedNum,
+        ContainsList,
+        EquipAffixId,
+        DisableFilter
+      } = reliquarySet
+
+      data.Set.push({
+        Id: SetId,
+        SetNeedNum,
+        ContainsList,
+        EquipAffixId,
+        DisableFilter
       })
     }
   }
