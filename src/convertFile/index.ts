@@ -2,6 +2,7 @@ import { existsSync } from 'fs'
 import AbilityData from './OutputData/AbilityData'
 import AvatarData from './OutputData/AvatarData'
 import DungeonData from './OutputData/DungeonData'
+import GadgetData from './OutputData/GadgetData'
 import GrowCurveData from './OutputData/GrowCurveData'
 import MapAreaData from './OutputData/MapAreaData'
 import MaterialData from './OutputData/MaterialData'
@@ -21,10 +22,11 @@ export default async (ver: string) => {
     return
   }
 
-  const writerFactoryList = [
+  const writerList = [
     AbilityData,
     AvatarData,
     DungeonData,
+    GadgetData,
     GrowCurveData,
     MapAreaData,
     MaterialData,
@@ -35,16 +37,22 @@ export default async (ver: string) => {
     SkillData,
     WeaponData,
     WorldData
-  ]
+  ].map(f => f(ver))
 
   if (!isNaN(filter)) {
-    writerFactoryList.splice(0, filter)
-    writerFactoryList.splice(1)
+    if (filter < 0) {
+      console.log('Filter list:')
+      for (let i = 0; i < writerList.length; i++) {
+        console.log(`  ${i} - ${writerList[i].name}`)
+      }
+      return
+    }
+
+    writerList.splice(0, filter)
+    writerList.splice(1)
   }
 
-  for (let writerFactory of writerFactoryList) {
-    const writer = writerFactory(ver)
-
+  for (let writer of writerList) {
     await writer.generateData()
     await writer.write()
   }
