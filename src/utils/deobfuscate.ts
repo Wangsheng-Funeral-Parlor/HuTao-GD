@@ -2,7 +2,7 @@ import { waitTick } from './asyncWait'
 
 interface ObfuscateMap { [id: string]: string }
 
-function isObfuscated(str: string): boolean {
+export function isObfuscated(str: string): boolean {
   return str.match(/^[A-Z]{11}$/) != null
 }
 

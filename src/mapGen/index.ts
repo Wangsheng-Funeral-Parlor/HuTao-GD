@@ -1,3 +1,4 @@
+import { isObfuscated } from '@/utils/deobfuscate'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
 import { cwd } from 'process'
@@ -6,7 +7,7 @@ function type(any: any): string {
   return Array.isArray(any) ? 'array' : (typeof any)
 }
 
-function convert(obfuscated: any, deobfuscated: any, map: { [key: string]: string }) {
+function generate(obfuscated: any, deobfuscated: any, map: { [key: string]: string }) {
   const obfuscatedType = type(obfuscated)
   const deobfuscatedType = type(deobfuscated)
 
@@ -24,8 +25,8 @@ function convert(obfuscated: any, deobfuscated: any, map: { [key: string]: strin
       }
 
       for (let i = 0; i < obfuscatedKeys.length; i++) {
-        convert(obfuscatedKeys[i], deobfuscatedKeys[i], map)
-        convert(obfuscated[obfuscatedKeys[i]], deobfuscated[deobfuscatedKeys[i]], map)
+        generate(obfuscatedKeys[i], deobfuscatedKeys[i], map)
+        generate(obfuscated[obfuscatedKeys[i]], deobfuscated[deobfuscatedKeys[i]], map)
       }
       break
     }
@@ -36,12 +37,16 @@ function convert(obfuscated: any, deobfuscated: any, map: { [key: string]: strin
       }
 
       for (let i = 0; i < obfuscated.length; i++) {
-        convert(obfuscated[i], deobfuscated[i], map)
+        generate(obfuscated[i], deobfuscated[i], map)
       }
       break
     }
     case 'string': {
-      if (obfuscated !== deobfuscated) map[obfuscated] = deobfuscated
+      if (
+        obfuscated !== deobfuscated &&
+        isObfuscated(obfuscated) &&
+        !isObfuscated(deobfuscated)
+      ) map[obfuscated] = deobfuscated
       break
     }
   }
@@ -67,7 +72,7 @@ export default async (ver: string) => {
   const inputB = JSON.parse(readFileSync(inputBPath, 'utf8')) || {}
   const map = JSON.parse(readFileSync(mapPath, 'utf8')) || {}
 
-  convert(inputA, inputB, map)
+  generate(inputA, inputB, map)
   fixName(map)
 
   writeFileSync(join(cwd(), `Map/${ver}.json`), JSON.stringify(map, null, 2))
