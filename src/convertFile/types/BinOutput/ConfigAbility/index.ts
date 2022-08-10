@@ -17,20 +17,23 @@ export default interface AbilityConfig {
         Duration?: number | string
         ElementType?: string
         ElementDurability: number
+        ThinkInterval?: number
         ModifierMixins?: MixinConfig[]
         Properties?: { [key: string]: number }
         State?: string
 
         OnAdded?: ActionConfig[]
         OnRemoved?: ActionConfig[]
-
-        OnAttackLanded?: ActionConfig[]
-
-        ThinkInterval?: number
         OnThinkInterval?: ActionConfig[]
+        OnAttackLanded?: ActionConfig[]
+        OnBeingHit?: ActionConfig[]
+        OnKill?: ActionConfig[]
       }
     }
+    OnAdded?: ActionConfig[]
+    OnRemoved?: ActionConfig[]
     OnAbilityStart?: ActionConfig[]
-    OnKill: ActionConfig[]
+    OnKill?: ActionConfig[]
+    IsDynamicAbility?: boolean
   }
 }
