@@ -3,7 +3,7 @@ import AbilityConfig from '#/types/BinOutput/ConfigAbility'
 import getRecurName from '@/utils/getRecurName'
 
 export class ConfigAbilityReader extends Reader {
-  declare data: { [name: string]: AbilityConfig[] }
+  declare data: { [name: string]: { [override: string]: AbilityConfig }[] }
 
   prefix: string
 
@@ -13,9 +13,9 @@ export class ConfigAbilityReader extends Reader {
     this.prefix = prefix
   }
 
-  getName(name: string, abilityConfig: AbilityConfig[]): string {
+  getName(name: string, abilityConfig: { [override: string]: AbilityConfig }[]): string {
     if (!name.match(/^[0-9a-f]{8}$/)) return name
-    return getRecurName(abilityConfig.map(ability => ability.Default.AbilityName), this.prefix) || name
+    return getRecurName(abilityConfig.map(ability => ability?.Default?.AbilityName), this.prefix) || name
   }
 
   async loadDir(): Promise<void> {

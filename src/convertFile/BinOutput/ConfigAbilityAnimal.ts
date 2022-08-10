@@ -6,7 +6,7 @@ export class ConfigAbilityAnimalReader extends ConfigAbilityReader {
     super(ver, '/Temp/AnimalAbilities', 'Animal')
   }
 
-  getName(name: string, abilityConfig: AbilityConfig[]): string {
+  getName(name: string, abilityConfig: { [override: string]: AbilityConfig }[]): string {
     return super.getName(name, abilityConfig)
   }
 }

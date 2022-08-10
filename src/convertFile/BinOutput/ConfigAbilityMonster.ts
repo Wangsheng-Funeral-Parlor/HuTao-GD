@@ -6,7 +6,7 @@ export class ConfigAbilityMonsterReader extends ConfigAbilityReader {
     super(ver, '/Temp/MonsterAbilities', 'Monster')
   }
 
-  getName(name: string, abilityConfig: AbilityConfig[]): string {
+  getName(name: string, abilityConfig: { [override: string]: AbilityConfig }[]): string {
     return super.getName(name, abilityConfig)
   }
 }

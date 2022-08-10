@@ -6,7 +6,7 @@ export class ConfigAbilityAvatarReader extends ConfigAbilityReader {
     super(ver, '/Temp/AvatarAbilities', 'Avatar')
   }
 
-  getName(name: string, abilityConfig: AbilityConfig[]): string {
+  getName(name: string, abilityConfig: { [override: string]: AbilityConfig }[]): string {
     return super.getName(name, abilityConfig)
   }
 }
