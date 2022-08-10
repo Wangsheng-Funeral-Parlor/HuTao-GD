@@ -1,3 +1,4 @@
+import ConfigGadget from '#/BinOutput/ConfigGadget'
 import GadgetExcelConfig from '#/ExcelBinOutput/GadgetExcelConfig'
 import GadgetPropExcelConfig from '#/ExcelBinOutput/GadgetPropExcelConfig'
 import GadgetDataList from '#/types/GadgetData'
@@ -18,12 +19,15 @@ export class GadgetDataWriter extends Writer {
 
     const { data, version } = this
 
+    const configGadgetLoader = ConfigGadget(version)
     const gadgetExcelConfigLoader = GadgetExcelConfig(version)
     const gadgetPropExcelConfigLoader = GadgetPropExcelConfig(version)
 
+    await configGadgetLoader.loadDir()
     await gadgetExcelConfigLoader.load()
     await gadgetPropExcelConfigLoader.load()
 
+    const { data: configGadget } = configGadgetLoader
     const { data: gadgetExcelConfig } = gadgetExcelConfigLoader
     const { data: gadgetPropExcelConfig } = gadgetPropExcelConfigLoader
 
@@ -56,15 +60,19 @@ export class GadgetDataWriter extends Writer {
         ControllerPathHashPre
       } = gadget
 
+      const gadgetConfig = Object.values(configGadget).find(config => config?.[JsonName] != null)?.[JsonName]
+
       data.Gadget.push({
         Id,
         Tags: Tags || [],
         JsonName,
+
         HasMove: !!HasMove,
         HasAudio: !!HasAudio,
         IsInteractive: !!IsInteractive,
         IsEquip: !!IsEquip,
         HasDynamicBarrier: !!HasDynamicBarrier,
+
         Type,
         CampID,
         VisionLevel,
@@ -72,6 +80,7 @@ export class GadgetDataWriter extends Writer {
         LandSoundID,
         RadarHintID,
         ChainId,
+
         PrefabPathHashSuffix,
         PrefabPathHashPre,
         ItemPrefabPathHashSuffix,
@@ -81,7 +90,9 @@ export class GadgetDataWriter extends Writer {
         PrefabPathRemoteHashSuffix,
         PrefabPathRemoteHashPre,
         ControllerPathHashSuffix,
-        ControllerPathHashPre
+        ControllerPathHashPre,
+
+        Config: gadgetConfig
       })
     }
 

@@ -1,5 +1,5 @@
-import Reader from './reader'
 import AvatarConfig from '#/types/BinOutput/ConfigAvatar'
+import Reader from './reader'
 
 export class ConfigAvatarReader extends Reader {
   declare data: { [name: string]: AvatarConfig }
