@@ -23,15 +23,28 @@ export default interface AbilityConfig {
 
       OnAdded?: ActionConfig[]
       OnRemoved?: ActionConfig[]
-      OnThinkInterval?: ActionConfig[]
-      OnAttackLanded?: ActionConfig[]
       OnBeingHit?: ActionConfig[]
+      OnAttackLanded?: ActionConfig[]
+      OnHittingOther?: ActionConfig[]
+      OnThinkInterval?: ActionConfig[]
       OnKill?: ActionConfig[]
+      OnCrash?: ActionConfig[]
+      OnAvatarIn?: ActionConfig[]
+      OnAvatarOut?: ActionConfig[]
+      OnReconnect?: ActionConfig[]
+      OnChangeAuthority?: ActionConfig[]
     }
   }
   OnAdded?: ActionConfig[]
   OnRemoved?: ActionConfig[]
   OnAbilityStart?: ActionConfig[]
   OnKill?: ActionConfig[]
+  OnFieldEnter?: ActionConfig[]
+  OnFieldExit?: ActionConfig[]
+  OnAttach?: ActionConfig[]
+  OnDetach?: ActionConfig[]
+  OnAvatarIn?: ActionConfig[]
+  OnAvatarOut?: ActionConfig[]
+  OnTriggerAvatarRay?: ActionConfig[]
   IsDynamicAbility?: boolean
 }
