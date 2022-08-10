@@ -10,7 +10,7 @@ export class SceneReader extends Reader {
 
   constructor(ver: string) {
     super('Scene', ver)
-    map = getJson(`map${ver}.json`, {})
+    map = getJson(`Map/${ver}.json`, {})
   }
 
   async loadDir(): Promise<void> {

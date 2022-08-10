@@ -10,7 +10,7 @@ export default async (ver: string) => {
   if (!existsSync(inputPath)) return console.log('Missing input.json')
 
   const input = JSON.parse(readFileSync(inputPath, 'utf8')) || {}
-  const map = getJson(`map${ver}.json`, {})
+  const map = getJson(`Map/${ver}.json`, {})
 
   writeFileSync(join(cwd(), 'output.json'), JSON.stringify(await deobfuscate(input, map), null, 2))
 }

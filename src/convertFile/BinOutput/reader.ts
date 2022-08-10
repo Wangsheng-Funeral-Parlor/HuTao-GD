@@ -19,7 +19,7 @@ export default class Reader {
     this.version = ver
     this.defaultData = defaultData
 
-    map = getJson(`map${ver}.json`, {})
+    map = getJson(`Map/${ver}.json`, {})
   }
 
   async load() {

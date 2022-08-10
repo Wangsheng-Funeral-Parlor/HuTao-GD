@@ -57,11 +57,11 @@ function fixName(obj: { [key: string]: string }) {
 export default async (ver: string) => {
   const inputAPath = join(cwd(), 'inputA.json')
   const inputBPath = join(cwd(), 'inputB.json')
-  const mapPath = join(cwd(), `map${ver}.json`)
+  const mapPath = join(cwd(), `Map/${ver}.json`)
 
   if (!existsSync(inputAPath)) return console.log('Missing inputA.json')
   if (!existsSync(inputBPath)) return console.log('Missing inputB.json')
-  if (!existsSync(mapPath)) return console.log(`Missing map${ver}.json`)
+  if (!existsSync(mapPath)) return console.log(`Missing Map/${ver}.json`)
 
   const inputA = JSON.parse(readFileSync(inputAPath, 'utf8')) || {}
   const inputB = JSON.parse(readFileSync(inputBPath, 'utf8')) || {}
@@ -70,5 +70,5 @@ export default async (ver: string) => {
   convert(inputA, inputB, map)
   fixName(map)
 
-  writeFileSync(join(cwd(), `map${ver}.json`), JSON.stringify(map, null, 2))
+  writeFileSync(join(cwd(), `Map/${ver}.json`), JSON.stringify(map, null, 2))
 }
