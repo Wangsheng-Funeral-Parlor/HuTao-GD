@@ -1,3 +1,4 @@
+import AbilityGroup from '#/BinOutput/AbilityGroup'
 import ConfigAbilityAnimal from '#/BinOutput/ConfigAbilityAnimal'
 import ConfigAbilityAvatar from '#/BinOutput/ConfigAbilityAvatar'
 import ConfigAbilityEquip from '#/BinOutput/ConfigAbilityEquip'
@@ -19,17 +20,20 @@ export class AbilityDataWriter extends Writer {
     const configAbilityAvatarLoader = ConfigAbilityAvatar(version)
     const configAbilityEquipLoader = ConfigAbilityEquip(version)
     const configAbilityMonsterLoader = ConfigAbilityMonster(version)
+    const abilityGroupLoader = AbilityGroup(version)
 
     await configAbilityAnimalLoader.loadDir()
     await configAbilityAvatarLoader.loadDir()
     await configAbilityEquipLoader.loadDir()
     await configAbilityMonsterLoader.loadDir()
+    await abilityGroupLoader.loadDir()
 
     this.data = {
       Animal: configAbilityAnimalLoader.data,
       Avatar: configAbilityAvatarLoader.data,
       Equip: configAbilityEquipLoader.data,
-      Monster: configAbilityMonsterLoader.data
+      Monster: configAbilityMonsterLoader.data,
+      Group: abilityGroupLoader.data
     }
   }
 }
