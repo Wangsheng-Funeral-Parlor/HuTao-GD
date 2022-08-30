@@ -58,7 +58,7 @@ export class MonsterDataWriter extends Writer {
         Affix,
         Comment,
         AbilityName,
-        IsLegal: IsLegal.length > 0,
+        IsLegal: IsLegal != null && IsLegal.length > 0,
         IsCommon: !!IsCommon,
         PreAdd: !!PreAdd
       })
