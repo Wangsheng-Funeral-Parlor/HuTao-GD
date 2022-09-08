@@ -1,3 +1,4 @@
+import ConfigMonster from '#/BinOutput/ConfigMonster'
 import MonsterAffixExcelConfig from '#/ExcelBinOutput/MonsterAffixExcelConfig'
 import MonsterDescribeExcelConfig from '#/ExcelBinOutput/MonsterDescribeExcelConfig'
 import MonsterExcelConfig from '#/ExcelBinOutput/MonsterExcelConfig'
@@ -24,18 +25,21 @@ export class MonsterDataWriter extends Writer {
 
     const { data, version } = this
 
+    const configMonsterLoader = ConfigMonster(version)
     const monsterAffixExcelConfigLoader = MonsterAffixExcelConfig(version)
     const monsterDescribeExcelConfigLoader = MonsterDescribeExcelConfig(version)
     const monsterExcelConfigLoader = MonsterExcelConfig(version)
     const monsterMultiPlayerExcelConfigLoader = MonsterMultiPlayerExcelConfig(version)
     const monsterSpecialNameExcelConfigLoader = MonsterSpecialNameExcelConfig(version)
 
+    await configMonsterLoader.loadDir()
     await monsterAffixExcelConfigLoader.load()
     await monsterDescribeExcelConfigLoader.load()
     await monsterExcelConfigLoader.load()
     await monsterMultiPlayerExcelConfigLoader.load()
     await monsterSpecialNameExcelConfigLoader.load()
 
+    const { data: configMonster } = configMonsterLoader
     const { data: monsterAffixExcelConfig } = monsterAffixExcelConfigLoader
     const { data: monsterDescribeExcelConfig } = monsterDescribeExcelConfigLoader
     const { data: monsterExcelConfig } = monsterExcelConfigLoader
@@ -150,6 +154,8 @@ export class MonsterDataWriter extends Writer {
         VisionLevel
       } = monster
 
+      const monsterConfig = configMonster[MonsterName]
+
       data.Monster.push({
         Name: MonsterName,
         Type,
@@ -173,6 +179,7 @@ export class MonsterDataWriter extends Writer {
         ControllerPathHashPre,
         ControllerPathRemoteHashSuffix,
         ControllerPathRemoteHashPre,
+        Config: monsterConfig,
         IsInvisibleReset: !!IsInvisibleReset,
         IsAIHashCheck: !!IsAIHashCheck,
         SafetyCheck: !!SafetyCheck,

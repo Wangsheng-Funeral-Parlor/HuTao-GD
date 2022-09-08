@@ -1,7 +1,8 @@
+import MonsterConfig from '#/types/BinOutput/ConfigMonster'
 import Reader from './reader'
 
 export class ConfigMonsterReader extends Reader {
-  //declare data: { [name: string]: MonsterConfig }
+  declare data: { [name: string]: MonsterConfig }
 
   constructor(ver: string) {
     super('Monster', ver)
