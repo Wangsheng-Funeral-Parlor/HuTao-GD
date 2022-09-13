@@ -63,7 +63,7 @@ function getRecurNameList(nameList: string[]): string[] {
   return ret
 }
 
-export default function getRecurName(nameList: string[], prefix?: string): string {
+export default function getRecurName(nameList: string[], prefix?: string | string[]): string {
   let lastLen = -1
   let lastNameList: string[] = []
 
@@ -84,7 +84,7 @@ export default function getRecurName(nameList: string[], prefix?: string): strin
   const wordCountMap: { [index: number]: number } = {}
 
   for (let name of nameList) {
-    const words = getWords(name).filter(word => word !== prefix)
+    const words = getWords(name).filter(word => Array.isArray(prefix) ? !prefix.includes(word) : word !== prefix)
     const noDupWords = removeDuplicates(words, false)
 
     // Update word list
