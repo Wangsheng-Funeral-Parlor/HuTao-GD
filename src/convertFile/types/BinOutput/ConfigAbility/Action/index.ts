@@ -5,6 +5,7 @@ import AddGlobalValue from './AddGlobalValue'
 import ApplyModifier from './ApplyModifier'
 import AttachEffect from './AttachEffect'
 import AttachModifier from './AttachModifier'
+import AvatarSkillStart from './AvatarSkillStart'
 import CreateGadget from './CreateGadget'
 import DamageByAttackValue from './DamageByAttackValue'
 import DoWatcherSystemAction from './DoWatcherSystemAction'
@@ -53,6 +54,7 @@ type ActionConfig =
   ApplyModifier |
   AttachEffect |
   AttachModifier |
+  AvatarSkillStart |
   CreateGadget |
   DamageByAttackValue |
   DoWatcherSystemAction |
