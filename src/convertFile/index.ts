@@ -12,6 +12,7 @@ import SceneData from './OutputData/SceneData'
 import ShopData from './OutputData/ShopData'
 import SkillData from './OutputData/SkillData'
 import WeaponData from './OutputData/WeaponData'
+import WeatherData from './OutputData/WeatherData'
 import WorldData from './OutputData/WorldData'
 
 export default async (ver: string) => {
@@ -36,6 +37,7 @@ export default async (ver: string) => {
     ShopData,
     SkillData,
     WeaponData,
+    WeatherData,
     WorldData
   ].map(f => f(ver))
 
