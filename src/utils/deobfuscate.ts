@@ -7,7 +7,7 @@ export function isObfuscated(str: string): boolean {
 }
 
 function fixString(str: string): string {
-  return (str.slice(0, 1).toUpperCase() + str.slice(1)).replace(/_[a-z]/g, s => s.slice(1).toUpperCase())
+  return (str.slice(0, 1).toUpperCase() + str.slice(1)).replace(/_[a-zA-Z]/g, s => s.slice(1).toUpperCase())
 }
 
 function deobfuscateString(str: string, map: ObfuscateMap, unknown: string[] = []): string {
