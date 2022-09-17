@@ -1,4 +1,4 @@
-import { existsSync } from 'fs'
+import { existsSync, readdirSync, statSync } from 'fs'
 import AbilityData from './OutputData/AbilityData'
 import AvatarData from './OutputData/AvatarData'
 import DungeonData from './OutputData/DungeonData'
@@ -15,8 +15,17 @@ import WeaponData from './OutputData/WeaponData'
 import WeatherData from './OutputData/WeatherData'
 import WorldData from './OutputData/WorldData'
 
-export default async (ver: string) => {
+export default async function convertFile(ver: string) {
   const filter = parseInt(process.argv.find(arg => arg.indexOf('-filter:') === 0)?.split(':')[1])
+
+  if (ver === '-1') {
+    const versions = readdirSync('InputData')
+    for (const v of versions) {
+      if (!statSync(`InputData/${v}`).isDirectory()) continue
+      await convertFile(v)
+    }
+    return
+  }
 
   if (!existsSync(`InputData/${ver}`)) {
     console.log('Missing input data.')

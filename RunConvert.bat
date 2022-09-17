@@ -5,6 +5,7 @@ chcp 65001
 cls
 
 echo Game version
+echo   Type -1 to generate for all versions detected
 echo   Example: 3.0.0
 echo.
 set /p ver=::
@@ -18,16 +19,18 @@ set /p filter=::
 cls
 
 setlocal enableextensions
-if not exist ".\InputData\%ver%" (
-  md ".\InputData\%ver%"
-  echo Put your resources in ".\InputData\%ver%" then press enter to continue.
-  echo File structure:
-  echo   .\InputData\%ver%
-  echo   ├─BinOutput
-  echo   ├─ExcelBinOutput
-  echo   └─Scripts
-  pause >nul
-  cls
+if "%ver%" neq "-1" (
+  if not exist ".\InputData\%ver%" (
+    md ".\InputData\%ver%"
+    echo Put your resources in ".\InputData\%ver%" then press enter to continue.
+    echo File structure:
+    echo   .\InputData\%ver%
+    echo   ├─BinOutput
+    echo   ├─ExcelBinOutput
+    echo   └─Scripts
+    pause >nul
+    cls
+  )
 )
 endlocal
 
