@@ -1,4 +1,4 @@
-import DungeonMapAreaExcelConfigList from '#/types/ExcelBinOutput/DungeonMapAreaExcelConfig'
+import DungeonMapAreaExcelConfigList from '$DT/ExcelBinOutput/DungeonMapAreaExcelConfig'
 import Reader from './reader'
 
 export class DungeonMapAreaExcelConfigReader extends Reader {

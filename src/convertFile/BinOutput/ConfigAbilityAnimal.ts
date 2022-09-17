@@ -1,4 +1,4 @@
-import AbilityConfig from '#/types/BinOutput/ConfigAbility'
+import ConfigAbility from '$DT/BinOutput/Config/ConfigAbility'
 import { ConfigAbilityReader } from './ConfigAbility'
 
 export class ConfigAbilityAnimalReader extends ConfigAbilityReader {
@@ -6,7 +6,7 @@ export class ConfigAbilityAnimalReader extends ConfigAbilityReader {
     super(ver, '/Temp/AnimalAbilities', 'Animal')
   }
 
-  getName(name: string, abilityConfig: { [override: string]: AbilityConfig }[]): string {
+  getName(name: string, abilityConfig: { [override: string]: ConfigAbility }[]): string {
     return super.getName(name, abilityConfig)
   }
 }

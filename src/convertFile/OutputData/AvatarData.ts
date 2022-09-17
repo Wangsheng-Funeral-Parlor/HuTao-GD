@@ -5,9 +5,9 @@ import AvatarFlycloakExcelConfig from '#/ExcelBinOutput/AvatarFlycloakExcelConfi
 import FetterInfoExcelConfig from '#/ExcelBinOutput/FetterInfoExcelConfig'
 import FettersExcelConfig from '#/ExcelBinOutput/FettersExcelConfig'
 import FetterStoryExcelConfig from '#/ExcelBinOutput/FetterStoryExcelConfig'
-import AvatarDataGroup from '#/types/AvatarData'
-import FetterConfig from '#/types/ExcelBinOutput/Common/FetterConfig'
-import FetterDataList from '#/types/FetterData'
+import AvatarDataGroup from '$DT/AvatarData'
+import FetterConfig from '$DT/ExcelBinOutput/Common/FetterConfig'
+import FetterDataList from '$DT/FetterData'
 import Writer from './writer'
 
 function getFetterConfig(data: FetterConfig): FetterConfig {

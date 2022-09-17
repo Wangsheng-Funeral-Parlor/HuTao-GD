@@ -1,4 +1,4 @@
-import WeaponPromoteExcelConfigList from '#/types/ExcelBinOutput/WeaponPromoteExcelConfig'
+import WeaponPromoteExcelConfigList from '$DT/ExcelBinOutput/WeaponPromoteExcelConfig'
 import Reader from './reader'
 
 export class WeaponPromoteExcelConfigReader extends Reader {

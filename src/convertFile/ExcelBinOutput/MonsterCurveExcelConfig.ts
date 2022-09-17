@@ -1,4 +1,4 @@
-import CurveExcelConfigList from '#/types/ExcelBinOutput/Common/CurveExcelConfig'
+import CurveExcelConfigList from '$DT/ExcelBinOutput/Common/CurveExcelConfig'
 import Reader from './reader'
 
 export class MonsterCurveExcelConfigReader extends Reader {

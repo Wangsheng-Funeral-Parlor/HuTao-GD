@@ -1,4 +1,4 @@
-import ProudSkillExcelConfigList from '#/types/ExcelBinOutput/ProudSkillExcelConfig'
+import ProudSkillExcelConfigList from '$DT/ExcelBinOutput/ProudSkillExcelConfig'
 import Reader from './reader'
 
 export class ProudSkillExcelConfigReader extends Reader {

@@ -1,4 +1,4 @@
-import MonsterMultiPlayerExcelConfigList from '#/types/ExcelBinOutput/MonsterMultiPlayerExcelConfig'
+import MonsterMultiPlayerExcelConfigList from '$DT/ExcelBinOutput/MonsterMultiPlayerExcelConfig'
 import Reader from './reader'
 
 export class MonsterMultiPlayerExcelConfigReader extends Reader {

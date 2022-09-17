@@ -1,4 +1,4 @@
-import GadgetPropExcelConfigList from '#/types/ExcelBinOutput/GadgetPropExcelConfig'
+import GadgetPropExcelConfigList from '$DT/ExcelBinOutput/GadgetPropExcelConfig'
 import Reader from './reader'
 
 export class GadgetPropExcelConfigReader extends Reader {

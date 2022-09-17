@@ -1,4 +1,4 @@
-import WeaponExcelConfigList from '#/types/ExcelBinOutput/WeaponExcelConfig'
+import WeaponExcelConfigList from '$DT/ExcelBinOutput/WeaponExcelConfig'
 import Reader from './reader'
 
 export class WeaponExcelConfigReader extends Reader {

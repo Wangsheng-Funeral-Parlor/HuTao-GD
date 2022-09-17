@@ -1,4 +1,4 @@
-import SceneExcelConfigList from '#/types/ExcelBinOutput/SceneExcelConfig'
+import SceneExcelConfigList from '$DT/ExcelBinOutput/SceneExcelConfig'
 import Reader from './reader'
 
 export class SceneExcelConfigReader extends Reader {

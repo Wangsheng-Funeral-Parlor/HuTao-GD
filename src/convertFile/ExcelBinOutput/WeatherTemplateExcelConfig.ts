@@ -1,4 +1,4 @@
-import WeatherTemplateExcelConfigList from '#/types/ExcelBinOutput/WeatherTemplateExcelConfig'
+import WeatherTemplateExcelConfigList from '$DT/ExcelBinOutput/WeatherTemplateExcelConfig'
 import Reader from './reader'
 
 export class WeatherTemplateExcelConfigReader extends Reader {

@@ -2,7 +2,7 @@ import AvatarCurveExcelConfig from '#/ExcelBinOutput/AvatarCurveExcelConfig'
 import GadgetCurveExcelConfig from '#/ExcelBinOutput/GadgetCurveExcelConfig'
 import MonsterCurveExcelConfig from '#/ExcelBinOutput/MonsterCurveExcelConfig'
 import WeaponCurveExcelConfig from '#/ExcelBinOutput/WeaponCurveExcelConfig'
-import GrowCurveDataGroup from '#/types/GrowCurveData'
+import GrowCurveDataGroup from '$DT/GrowCurveData'
 import Writer from './writer'
 
 export class GrowCurveDataWriter extends Writer {

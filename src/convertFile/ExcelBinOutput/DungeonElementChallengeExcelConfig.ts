@@ -1,4 +1,4 @@
-import DungeonElementChallengeExcelConfigList from '#/types/ExcelBinOutput/DungeonElementChallengeExcelConfig'
+import DungeonElementChallengeExcelConfigList from '$DT/ExcelBinOutput/DungeonElementChallengeExcelConfig'
 import Reader from './reader'
 
 export class DungeonElementChallengeExcelConfigReader extends Reader {

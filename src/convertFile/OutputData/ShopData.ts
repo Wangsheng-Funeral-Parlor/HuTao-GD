@@ -1,5 +1,5 @@
 import ShopGoodsExcelConfig from '#/ExcelBinOutput/ShopGoodsExcelConfig'
-import ShopDataList, { ShopData } from '#/types/ShopData'
+import ShopDataList, { ShopData } from '$DT/ShopData'
 import Writer from './writer'
 
 export class ShopDataWriter extends Writer {

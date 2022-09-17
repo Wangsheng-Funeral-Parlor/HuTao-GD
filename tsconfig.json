@@ -17,6 +17,9 @@
     "outDir": "build",
     "baseUrl": "./src",
     "paths": {
+      "$DT/*": [
+        "convertFile/types/*"
+      ],
       "#/*": [
         "convertFile/*"
       ],

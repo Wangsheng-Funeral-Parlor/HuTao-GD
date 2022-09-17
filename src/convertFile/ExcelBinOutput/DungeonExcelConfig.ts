@@ -1,4 +1,4 @@
-import DungeonExcelConfigList from '#/types/ExcelBinOutput/DungeonExcelConfig'
+import DungeonExcelConfigList from '$DT/ExcelBinOutput/DungeonExcelConfig'
 import Reader from './reader'
 
 export class DungeonExcelConfigReader extends Reader {

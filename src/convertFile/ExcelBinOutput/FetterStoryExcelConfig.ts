@@ -1,4 +1,4 @@
-import FetterStoryExcelConfigList from '#/types/ExcelBinOutput/FetterStoryExcelConfig'
+import FetterStoryExcelConfigList from '$DT/ExcelBinOutput/FetterStoryExcelConfig'
 import Reader from './reader'
 
 export class FetterStoryExcelConfigReader extends Reader {

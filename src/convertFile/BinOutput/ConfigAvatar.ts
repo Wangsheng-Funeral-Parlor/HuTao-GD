@@ -1,8 +1,8 @@
-import AvatarConfig from '#/types/BinOutput/ConfigAvatar'
+import ConfigAvatar from '$DT/BinOutput/Config/ConfigAvatar'
 import Reader from './reader'
 
 export class ConfigAvatarReader extends Reader {
-  declare data: { [name: string]: AvatarConfig }
+  declare data: { [name: string]: ConfigAvatar }
 
   constructor(ver: string) {
     super('Avatar', ver)

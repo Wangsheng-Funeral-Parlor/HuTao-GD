@@ -1,15 +1,15 @@
-import MonsterConfig from '#/types/BinOutput/ConfigMonster'
+import ConfigMonster from '$DT/BinOutput/Config/ConfigMonster'
 import getRecurName from '@/utils/getRecurName'
 import Reader from './reader'
 
 export class ConfigMonsterReader extends Reader {
-  declare data: { [name: string]: MonsterConfig }
+  declare data: { [name: string]: ConfigMonster }
 
   constructor(ver: string) {
     super('Monster', ver)
   }
 
-  getName(name: string, monsterConfig: MonsterConfig): string {
+  getName(name: string, monsterConfig: ConfigMonster): string {
     if (!name.match(/^[0-9a-f]{8}$/)) return name
     return getRecurName(monsterConfig?.Abilities?.map(ability => ability?.AbilityName), ['Monster', 'Animal']) || name
   }

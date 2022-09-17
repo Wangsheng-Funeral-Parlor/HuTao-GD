@@ -1,7 +1,7 @@
 import WeaponExcelConfig from '#/ExcelBinOutput/WeaponExcelConfig'
 import WeaponLevelExcelConfig from '#/ExcelBinOutput/WeaponLevelExcelConfig'
 import WeaponPromoteExcelConfig from '#/ExcelBinOutput/WeaponPromoteExcelConfig'
-import WeaponDataGroup from '#/types/WeaponData'
+import WeaponDataGroup from '$DT/WeaponData'
 import Writer from './writer'
 
 export class WeaponDataWriter extends Writer {

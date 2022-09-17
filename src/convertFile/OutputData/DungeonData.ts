@@ -7,7 +7,7 @@ import DungeonMapAreaExcelConfig from '#/ExcelBinOutput/DungeonMapAreaExcelConfi
 import DungeonPassExcelConfig from '#/ExcelBinOutput/DungeonPassExcelConfig'
 import DungeonRosterConfig from '#/ExcelBinOutput/DungeonRosterConfig'
 import DungeonSerialConfig from '#/ExcelBinOutput/DungeonSerialConfig'
-import DungeonDataList from '#/types/DungeonData'
+import DungeonDataList from '$DT/DungeonData'
 import Writer from './writer'
 
 export class DungeonDataWriter extends Writer {

@@ -1,8 +1,8 @@
-import AbilityGroupConfig from '#/types/BinOutput/AbilityGroup'
+import ConfigAbilityGroup from '$DT/BinOutput/Config/ConfigAbilityGroup'
 import Reader from './reader'
 
 export class AbilityGroupReader extends Reader {
-  declare data: { [name: string]: AbilityGroupConfig }
+  declare data: { [name: string]: ConfigAbilityGroup }
 
   constructor(ver: string) {
     super('AbilityGroup', ver)

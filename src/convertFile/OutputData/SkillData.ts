@@ -2,7 +2,7 @@ import AvatarSkillDepotExcelConfig from '#/ExcelBinOutput/AvatarSkillDepotExcelC
 import AvatarSkillExcelConfig from '#/ExcelBinOutput/AvatarSkillExcelConfig'
 import AvatarTalentExcelConfig from '#/ExcelBinOutput/AvatarTalentExcelConfig'
 import ProudSkillExcelConfig from '#/ExcelBinOutput/ProudSkillExcelConfig'
-import SkillDataList from '#/types/SkillData'
+import SkillDataList from '$DT/SkillData'
 import Writer from './writer'
 
 export class SkillDataWriter extends Writer {

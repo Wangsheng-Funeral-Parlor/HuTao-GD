@@ -1,4 +1,4 @@
-import AvatarFlycloakExcelConfigList from '#/types/ExcelBinOutput/AvatarFlycloakExcelConfig'
+import AvatarFlycloakExcelConfigList from '$DT/ExcelBinOutput/AvatarFlycloakExcelConfig'
 import Reader from './reader'
 
 export class AvatarFlycloakExcelConfigReader extends Reader {

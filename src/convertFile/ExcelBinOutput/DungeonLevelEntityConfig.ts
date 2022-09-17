@@ -1,4 +1,4 @@
-import DungeonLevelEntityConfigList from '#/types/ExcelBinOutput/DungeonLevelEntityConfig'
+import DungeonLevelEntityConfigList from '$DT/ExcelBinOutput/DungeonLevelEntityConfig'
 import Reader from './reader'
 
 export class DungeonLevelEntityConfigReader extends Reader {

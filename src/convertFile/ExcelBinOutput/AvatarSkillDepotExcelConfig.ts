@@ -1,4 +1,4 @@
-import AvatarSkillDepotExcelConfigList from '#/types/ExcelBinOutput/AvatarSkillDepotExcelConfig'
+import AvatarSkillDepotExcelConfigList from '$DT/ExcelBinOutput/AvatarSkillDepotExcelConfig'
 import Reader from './reader'
 
 export class AvatarSkillDepotExcelConfigReader extends Reader {

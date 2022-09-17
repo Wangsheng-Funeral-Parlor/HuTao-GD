@@ -1,5 +1,5 @@
 import MapAreaConfig from '#/ExcelBinOutput/MapAreaConfig'
-import MapAreaDataList from '#/types/MapAreaData'
+import MapAreaDataList from '$DT/MapAreaData'
 import Writer from './writer'
 
 export class MapAreaDataWriter extends Writer {

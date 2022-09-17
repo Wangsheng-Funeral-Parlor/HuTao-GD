@@ -1,9 +1,9 @@
-import ScenePoint from '#/BinOutput/ScenePoint'
+import ConfigScene from '#/BinOutput/ConfigScene'
 import CityConfig from '#/ExcelBinOutput/CityConfig'
 import SceneExcelConfig from '#/ExcelBinOutput/SceneExcelConfig'
 import SceneTagConfig from '#/ExcelBinOutput/SceneTagConfig'
 import Scene from '#/Script/Scene'
-import SceneDataList from '#/types/SceneData'
+import SceneDataList from '$DT/SceneData'
 import Writer from './writer'
 
 export class SceneDataWriter extends Writer {
@@ -21,19 +21,19 @@ export class SceneDataWriter extends Writer {
     const sceneExcelConfigLoader = SceneExcelConfig(version)
     const cityConfigLoader = CityConfig(version)
     const sceneTagConfigLoader = SceneTagConfig(version)
-    const scenePointLoader = ScenePoint(version)
+    const configSceneLoader = ConfigScene(version)
     const sceneScriptLoader = Scene(version)
 
     await sceneExcelConfigLoader.load()
     await cityConfigLoader.load()
     await sceneTagConfigLoader.load()
-    await scenePointLoader.loadDir()
+    await configSceneLoader.loadDir()
     await sceneScriptLoader.loadDir()
 
     const { data: sceneExcelConfig } = sceneExcelConfigLoader
     const { data: cityConfig } = cityConfigLoader
     const { data: sceneTagConfig } = sceneTagConfigLoader
-    const { data: scenePointConfig } = scenePointLoader
+    const { data: configScene } = configSceneLoader
     const { data: sceneScript } = sceneScriptLoader
 
     for (let scene of sceneExcelConfig) {
@@ -65,7 +65,7 @@ export class SceneDataWriter extends Writer {
           AdventurePointId: city.AdventurePointId,
           OpenState: city.OpenState
         })),
-        ScenePoint: scenePointConfig[Id],
+        Config: configScene[Id],
         Tag: sceneTagConfig.filter(tag => tag.SceneId === Id).map(tag => ({
           Id: tag.Id,
           Name: tag.SceneTagName,

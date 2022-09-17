@@ -1,4 +1,4 @@
-import SceneTagConfigList from '#/types/ExcelBinOutput/SceneTagConfig'
+import SceneTagConfigList from '$DT/ExcelBinOutput/SceneTagConfig'
 import Reader from './reader'
 
 export class SceneTagConfigReader extends Reader {

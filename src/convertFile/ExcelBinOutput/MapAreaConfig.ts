@@ -1,4 +1,4 @@
-import MapAreaConfigList from '#/types/ExcelBinOutput/MapAreaConfig'
+import MapAreaConfigList from '$DT/ExcelBinOutput/MapAreaConfig'
 import Reader from './reader'
 
 export class MapAreaConfigReader extends Reader {

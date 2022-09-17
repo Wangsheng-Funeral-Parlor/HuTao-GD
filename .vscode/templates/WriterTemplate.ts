@@ -1,4 +1,4 @@
-import WriterTemplateList from '#/types/WriterTemplate'
+import WriterTemplateList from '$DT/WriterTemplate'
 import Writer from './writer'
 
 export class WriterTemplateWriter extends Writer {

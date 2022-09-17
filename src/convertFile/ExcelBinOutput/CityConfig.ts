@@ -1,4 +1,4 @@
-import CityConfigList from '#/types/ExcelBinOutput/CityConfig'
+import CityConfigList from '$DT/ExcelBinOutput/CityConfig'
 import Reader from './reader'
 
 export class CityConfigReader extends Reader {

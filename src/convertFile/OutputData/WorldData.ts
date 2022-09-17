@@ -1,6 +1,6 @@
 import WorldExcelConfig from '#/ExcelBinOutput/WorldExcelConfig'
 import WorldLevelExcelConfig from '#/ExcelBinOutput/WorldLevelExcelConfig'
-import WorldDataGroup from '#/types/WorldData'
+import WorldDataGroup from '$DT/WorldData'
 import Writer from './writer'
 
 export class WorldDataWriter extends Writer {

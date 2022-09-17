@@ -1,4 +1,4 @@
-import ReliquaryDecomposeExcelConfigList from '#/types/ExcelBinOutput/ReliquaryDecomposeExcelConfig'
+import ReliquaryDecomposeExcelConfigList from '$DT/ExcelBinOutput/ReliquaryDecomposeExcelConfig'
 import Reader from './reader'
 
 export class ReliquaryDecomposeExcelConfigReader extends Reader {

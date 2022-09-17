@@ -1,4 +1,4 @@
-import ReliquarySetExcelConfigList from '#/types/ExcelBinOutput/ReliquarySetExcelConfig'
+import ReliquarySetExcelConfigList from '$DT/ExcelBinOutput/ReliquarySetExcelConfig'
 import Reader from './reader'
 
 export class ReliquarySetExcelConfigReader extends Reader {

@@ -1,4 +1,4 @@
-import ReliquaryPowerupExcelConfigList from '#/types/ExcelBinOutput/ReliquaryPowerupExcelConfig'
+import ReliquaryPowerupExcelConfigList from '$DT/ExcelBinOutput/ReliquaryPowerupExcelConfig'
 import Reader from './reader'
 
 export class ReliquaryPowerupExcelConfigReader extends Reader {

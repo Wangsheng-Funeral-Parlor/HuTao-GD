@@ -1,4 +1,4 @@
-import SceneScriptConfigMap from '#/types/Script/SceneScriptConfig'
+import SceneScriptConfigMap from '$DT/Script/SceneScriptConfig'
 import deobfuscate from '@/utils/deobfuscate'
 import getJson from '@/utils/getJson'
 import Reader from './reader'

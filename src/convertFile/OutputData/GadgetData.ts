@@ -1,7 +1,7 @@
 import ConfigGadget from '#/BinOutput/ConfigGadget'
 import GadgetExcelConfig from '#/ExcelBinOutput/GadgetExcelConfig'
 import GadgetPropExcelConfig from '#/ExcelBinOutput/GadgetPropExcelConfig'
-import GadgetDataList from '#/types/GadgetData'
+import GadgetDataList from '$DT/GadgetData'
 import Writer from './writer'
 
 export class GadgetDataWriter extends Writer {

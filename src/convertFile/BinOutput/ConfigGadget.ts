@@ -1,8 +1,8 @@
-import GadgetConfig from '#/types/BinOutput/ConfigGadget'
+import ConfigGadget from '$DT/BinOutput/Config/ConfigGadget'
 import Reader from './reader'
 
 export class ConfigGadgetReader extends Reader {
-  declare data: { [name: string]: { [jsonName: string]: GadgetConfig } }
+  declare data: { [name: string]: { [jsonName: string]: ConfigGadget } }
 
   constructor(ver: string) {
     super('Gadget', ver)

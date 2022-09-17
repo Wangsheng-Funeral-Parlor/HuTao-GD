@@ -1,4 +1,4 @@
-import MaterialExcelConfigList from '#/types/ExcelBinOutput/MaterialExcelConfig'
+import MaterialExcelConfigList from '$DT/ExcelBinOutput/MaterialExcelConfig'
 import Reader from './reader'
 
 export class MaterialExcelConfigReader extends Reader {

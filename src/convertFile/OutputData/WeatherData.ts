@@ -1,6 +1,6 @@
 import WeatherExcelConfig from '#/ExcelBinOutput/WeatherExcelConfig'
 import WeatherTemplateExcelConfig from '#/ExcelBinOutput/WeatherTemplateExcelConfig'
-import WeatherDataList, { WeatherTemplateData } from '#/types/WeatherData'
+import WeatherDataList, { WeatherTemplateData } from '$DT/WeatherData'
 import Writer from './writer'
 
 export class WeatherDataWriter extends Writer {

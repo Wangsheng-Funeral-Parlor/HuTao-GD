@@ -4,7 +4,7 @@ import ConfigAbilityAvatar from '#/BinOutput/ConfigAbilityAvatar'
 import ConfigAbilityEquip from '#/BinOutput/ConfigAbilityEquip'
 import ConfigAbilityGadget from '#/BinOutput/ConfigAbilityGadget'
 import ConfigAbilityMonster from '#/BinOutput/ConfigAbilityMonster'
-import AbilityDataGroup from '#/types/AbilityData'
+import AbilityDataGroup from '$DT/AbilityData'
 import Writer from './writer'
 
 export class AbilityDataWriter extends Writer {

@@ -3,7 +3,7 @@ import ReliquaryExcelConfig from '#/ExcelBinOutput/ReliquaryExcelConfig'
 import ReliquaryLevelExcelConfig from '#/ExcelBinOutput/ReliquaryLevelExcelConfig'
 import ReliquaryMainPropExcelConfig from '#/ExcelBinOutput/ReliquaryMainPropExcelConfig'
 import ReliquarySetExcelConfig from '#/ExcelBinOutput/ReliquarySetExcelConfig'
-import ReliquaryDataGroup from '#/types/ReliquaryData'
+import ReliquaryDataGroup from '$DT/ReliquaryData'
 import Writer from './writer'
 
 export class ReliquaryDataWriter extends Writer {

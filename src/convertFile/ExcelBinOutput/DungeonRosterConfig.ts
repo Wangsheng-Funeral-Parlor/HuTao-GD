@@ -1,4 +1,4 @@
-import DungeonRosterConfigList from '#/types/ExcelBinOutput/DungeonRosterConfig'
+import DungeonRosterConfigList from '$DT/ExcelBinOutput/DungeonRosterConfig'
 import Reader from './reader'
 
 export class DungeonRosterConfigReader extends Reader {

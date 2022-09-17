@@ -1,4 +1,4 @@
-import WorldLevelExcelConfigList from '#/types/ExcelBinOutput/WorldLevelExcelConfig'
+import WorldLevelExcelConfigList from '$DT/ExcelBinOutput/WorldLevelExcelConfig'
 import Reader from './reader'
 
 export class WorldLevelExcelConfigReader extends Reader {

@@ -4,7 +4,7 @@ import MonsterDescribeExcelConfig from '#/ExcelBinOutput/MonsterDescribeExcelCon
 import MonsterExcelConfig from '#/ExcelBinOutput/MonsterExcelConfig'
 import MonsterMultiPlayerExcelConfig from '#/ExcelBinOutput/MonsterMultiPlayerExcelConfig'
 import MonsterSpecialNameExcelConfig from '#/ExcelBinOutput/MonsterSpecialNameExcelConfig'
-import MonsterDataList from '#/types/MonsterData'
+import MonsterDataList from '$DT/MonsterData'
 import Writer from './writer'
 
 export class MonsterDataWriter extends Writer {

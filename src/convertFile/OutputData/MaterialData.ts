@@ -1,5 +1,5 @@
 import MaterialExcelConfig from '#/ExcelBinOutput/MaterialExcelConfig'
-import MaterialDataList from '#/types/MaterialData'
+import MaterialDataList from '$DT/MaterialData'
 import Writer from './writer'
 
 export class MaterialDataWriter extends Writer {

@@ -1,4 +1,4 @@
-import MonsterSpecialNameExcelConfigList from '#/types/ExcelBinOutput/MonsterSpecialNameExcelConfig'
+import MonsterSpecialNameExcelConfigList from '$DT/ExcelBinOutput/MonsterSpecialNameExcelConfig'
 import Reader from './reader'
 
 export class MonsterSpecialNameExcelConfigReader extends Reader {

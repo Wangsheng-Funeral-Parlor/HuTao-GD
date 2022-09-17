@@ -1,4 +1,4 @@
-import DungeonSerialConfigList from '#/types/ExcelBinOutput/DungeonSerialConfig'
+import DungeonSerialConfigList from '$DT/ExcelBinOutput/DungeonSerialConfig'
 import Reader from './reader'
 
 export class DungeonSerialConfigReader extends Reader {

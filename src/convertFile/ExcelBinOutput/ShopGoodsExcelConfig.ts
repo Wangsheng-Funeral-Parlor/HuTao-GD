@@ -1,4 +1,4 @@
-import ShopGoodsExcelConfigList from '#/types/ExcelBinOutput/ShopGoodsExcelConfig'
+import ShopGoodsExcelConfigList from '$DT/ExcelBinOutput/ShopGoodsExcelConfig'
 import Reader from './reader'
 
 export class ShopGoodsExcelConfigReader extends Reader {
