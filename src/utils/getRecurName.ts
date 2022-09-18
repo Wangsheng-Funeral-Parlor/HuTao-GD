@@ -17,7 +17,7 @@ function removeDuplicates<T>(array: T[], modify: boolean = true): T[] {
 }
 
 function getWords(str: string): string[] {
-  return removeDuplicates(str.match(/((?<=_)|^).*?(?=_|$)/g) || [])
+  return removeDuplicates(str?.match(/((?<=_)|^).*?(?=_|$)/g) || [])
 }
 
 function getRecurNameList(nameList: string[]): string[] {

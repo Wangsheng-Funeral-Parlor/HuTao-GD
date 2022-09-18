@@ -18,14 +18,11 @@ import WorldData from './OutputData/WorldData'
 export default async function convertFile(ver: string) {
   const filter = parseInt(process.argv.find(arg => arg.indexOf('-filter:') === 0)?.split(':')[1])
 
-  if (ver === '-1') {
-    const versions = readdirSync('InputData')
-    for (const v of versions) {
-      if (!statSync(`InputData/${v}`).isDirectory()) continue
-      await convertFile(v)
-    }
-    return
-  }
+  if (ver === '-1') return Promise.all(
+    readdirSync('InputData')
+      .filter(v => statSync(`InputData/${v}`).isDirectory())
+      .map(v => convertFile(v))
+  )
 
   if (!existsSync(`InputData/${ver}`)) {
     console.log('Missing input data.')
