@@ -1,6 +1,7 @@
 import { existsSync, readdirSync, statSync } from 'fs'
 import AbilityData from './OutputData/AbilityData'
 import AvatarData from './OutputData/AvatarData'
+import DropData from './OutputData/DropData'
 import DungeonData from './OutputData/DungeonData'
 import GadgetData from './OutputData/GadgetData'
 import GrowCurveData from './OutputData/GrowCurveData'
@@ -32,6 +33,7 @@ export default async function convertFile(ver: string) {
   const writerList = [
     AbilityData,
     AvatarData,
+    DropData,
     DungeonData,
     GadgetData,
     GrowCurveData,
