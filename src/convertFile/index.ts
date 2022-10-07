@@ -12,6 +12,7 @@ import ReliquaryData from './OutputData/ReliquaryData'
 import SceneData from './OutputData/SceneData'
 import ShopData from './OutputData/ShopData'
 import SkillData from './OutputData/SkillData'
+import TalentData from './OutputData/TalentData'
 import WeaponData from './OutputData/WeaponData'
 import WeatherData from './OutputData/WeatherData'
 import WorldData from './OutputData/WorldData'
@@ -44,6 +45,7 @@ export default async function convertFile(ver: string) {
     SceneData,
     ShopData,
     SkillData,
+    TalentData,
     WeaponData,
     WeatherData,
     WorldData

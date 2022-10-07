@@ -1,0 +1,7 @@
+{
+  "files.watcherExclude": {
+    "**/build/**": true,
+    "**/InputData/**": true,
+    "**/OutputData/**": true
+  }
+}

@@ -1,12 +1,11 @@
 import AvatarSkillDepotExcelConfig from '#/ExcelBinOutput/AvatarSkillDepotExcelConfig'
 import AvatarSkillExcelConfig from '#/ExcelBinOutput/AvatarSkillExcelConfig'
-import AvatarTalentExcelConfig from '#/ExcelBinOutput/AvatarTalentExcelConfig'
 import ProudSkillExcelConfig from '#/ExcelBinOutput/ProudSkillExcelConfig'
-import SkillDataList from '$DT/SkillData'
+import SkillDataGroup from '$DT/SkillData'
 import Writer from './writer'
 
 export class SkillDataWriter extends Writer {
-  declare data: SkillDataList
+  declare data: SkillDataGroup
 
   constructor(ver: string) {
     super('SkillData', ver)
@@ -16,8 +15,7 @@ export class SkillDataWriter extends Writer {
     this.data = {
       Depot: [],
       Skill: [],
-      ProudSkill: [],
-      Talent: []
+      ProudSkill: []
     }
 
     const { version, data } = this
@@ -25,17 +23,14 @@ export class SkillDataWriter extends Writer {
     const avatarSkillDepotExcelConfigLoader = AvatarSkillDepotExcelConfig(version)
     const avatarSkillExcelConfigLoader = AvatarSkillExcelConfig(version)
     const proudSkillExcelConfigLoader = ProudSkillExcelConfig(version)
-    const avatarTalentExcelConfigLoader = AvatarTalentExcelConfig(version)
 
     await avatarSkillDepotExcelConfigLoader.load()
     await avatarSkillExcelConfigLoader.load()
     await proudSkillExcelConfigLoader.load()
-    await avatarTalentExcelConfigLoader.load()
 
     const { data: avatarSkillDepotExcelConfig } = avatarSkillDepotExcelConfigLoader
     const { data: avatarSkillExcelConfig } = avatarSkillExcelConfigLoader
     const { data: proudSkillExcelConfig } = proudSkillExcelConfigLoader
-    const { data: avatarTalentExcelConfig } = avatarTalentExcelConfigLoader
 
     for (let depot of avatarSkillDepotExcelConfig) {
       const {
@@ -154,30 +149,6 @@ export class SkillDataWriter extends Writer {
         LifeEffectType,
         CoinCost,
         EffectiveForTeam
-      })
-    }
-
-    for (let avatarTalent of avatarTalentExcelConfig) {
-      const {
-        TalentId,
-        MainCostItemId,
-        MainCostItemCount,
-        OpenConfig,
-        AddProps,
-        ParamList,
-
-        PrevTalent
-      } = avatarTalent
-
-      data.Talent.push({
-        Id: TalentId,
-        MainCostItemId,
-        MainCostItemCount,
-        OpenConfig,
-        AddProps,
-        ParamList,
-
-        PrevTalent
       })
     }
   }
