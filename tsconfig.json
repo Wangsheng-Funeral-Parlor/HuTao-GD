@@ -27,13 +27,5 @@
         "*"
       ]
     }
-  },
-  "watchOptions": {
-    "excludeDirectories": [
-      "**/node_modules",
-      "InputData",
-      "OutputData",
-      "build"
-    ]
   }
 }
