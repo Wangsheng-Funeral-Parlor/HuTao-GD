@@ -64,6 +64,7 @@ export class TalentDataWriter extends Writer {
 
       data.Avatar.push({
         Id: TalentId,
+        Name: OpenConfig,
         MainCostItemId,
         MainCostItemCount,
         AddProps,
@@ -92,6 +93,7 @@ export class TalentDataWriter extends Writer {
       data.Equip.push({
         AffixId,
         Id,
+        Name: OpenConfig,
         NameTextMapHash,
         DescTextMapHash,
         AddProps,
@@ -128,6 +130,7 @@ export class TalentDataWriter extends Writer {
       data.Team.push({
         TeamResonanceId,
         TeamResonanceGroupId,
+        Name: OpenConfig,
         Level,
         NameTextMapHash,
         DescTextMapHash,
