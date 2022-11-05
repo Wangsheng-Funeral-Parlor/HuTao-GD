@@ -13,6 +13,7 @@
     "@types/node": "^17.0.31"
   },
   "dependencies": {
+    "jsonc-parser": "^3.2.0",
     "luaparse": "^0.3.1"
   }
 }
