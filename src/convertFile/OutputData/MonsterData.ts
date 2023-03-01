@@ -159,7 +159,7 @@ export class MonsterDataWriter extends Writer {
       } = monster
 
       const combatConfig = monsterTxt.find(m => parseInt(m.Id) === Id)?.CombatConfig?.replace(/^Config(Animal|Monster).*?_/, '')
-      const monsterConfig = configMonster[combatConfig] || configMonster[MonsterName]
+      const monsterConfig = configMonster[combatConfig] || configMonster[MonsterName.replace(/^(Animal|Monster).*?_/, '')]
 
       data.Monster.push({
         Name: MonsterName,
