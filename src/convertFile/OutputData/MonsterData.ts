@@ -6,6 +6,7 @@ import MonsterMultiPlayerExcelConfig from '#/ExcelBinOutput/MonsterMultiPlayerEx
 import MonsterSpecialNameExcelConfig from '#/ExcelBinOutput/MonsterSpecialNameExcelConfig'
 import Monster from '#/Text/Monster'
 import MonsterDataList from '$DT/MonsterData'
+import { getPathHash } from '@/utils/hash'
 import Writer from './writer'
 
 export class MonsterDataWriter extends Writer {
@@ -159,7 +160,7 @@ export class MonsterDataWriter extends Writer {
       } = monster
 
       const combatConfig = monsterTxt.find(m => parseInt(m.Id) === Id)?.CombatConfig?.replace(/^Config(Animal|Monster).*?_/, '')
-      const monsterConfig = configMonster[combatConfig] || configMonster[MonsterName.replace(/^(Animal|Monster).*?_/, '')]
+      const monsterConfig = configMonster[combatConfig] || configMonster[MonsterName.replace(/^(Animal|Monster).*?_/, '')] || configMonster[getPathHash(`Data/_BinOutput/Monster/Config${MonsterName}.MiHoYoBinData`).slice(0, 8)]
 
       data.Monster.push({
         Name: MonsterName,
