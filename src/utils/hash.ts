@@ -5,5 +5,5 @@ export function getPathHash(path: string, s = 5): string {
   const hash = createHash("md5");
   hash.update(path);
   hash.update(Buffer.alloc(l - path.length, 0));
-  return hash.digest().slice(0, s).reverse().toString("hex");
+  return hash.digest().slice(0, s).reverse().toString("hex").slice(0, 8);
 }
