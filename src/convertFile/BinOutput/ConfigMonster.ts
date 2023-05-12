@@ -21,11 +21,10 @@ export class ConfigMonsterReader extends Reader {
     const { data } = this
     this.data = Object.fromEntries(
       Object.entries(data)
-        .filter(e => e[0].indexOf('ConfigAnimal_') === 0 || e[0].indexOf('ConfigMonster_') === 0)
-        .map(e => [
-          e[0].match(/(?<=^Config(Animal|Monster).*?_).*$/)?.[0] || this.getName(e[0], e[1]),
-          e[1]
-        ])
+      .map(e => [
+        e[0].match(/(?<=^Config(Animal|Monster).*?_).*$/)?.[0] || this.getName(e[0], e[1]),
+        e[1]
+      ])
     )
   }
 }

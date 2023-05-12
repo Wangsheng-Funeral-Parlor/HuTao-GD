@@ -67,8 +67,7 @@ export default function getRecurName(nameList: string[], prefix?: string | strin
   let lastLen = -1
   let lastNameList: string[] = []
 
-  if (nameList.length <= 1) return null
-
+  if (nameList?.length <= 1 || !nameList) return null
   while (nameList.length !== lastLen) {
     lastLen = nameList.length
     lastNameList = nameList
