@@ -1,5 +1,5 @@
 # HuTao-GD
-Generate data for [HuTao GS](https://github.com/NotArandomGUY/HuTao-GS)
+Generate data for [HuTao-GS](https://github.com/Wangsheng-Funeral-Parlor/HuTao-GS)  (Use the dev branch)
 ## Usage
 1. Run `npm run build`
 2. Put resources in **./InputData/{version}/**  
