@@ -1,11 +1,11 @@
-import WeaponExcelConfigList from '$DT/ExcelBinOutput/WeaponExcelConfig'
-import Reader from './reader'
+import WeaponExcelConfigList from "$DT/ExcelBinOutput/WeaponExcelConfig"
+import Reader from "./reader"
 
 export class WeaponExcelConfigReader extends Reader {
   declare data: WeaponExcelConfigList
 
   constructor(ver: string) {
-    super('WeaponExcelConfigData', ver)
+    super("WeaponExcelConfigData", ver)
   }
 }
 

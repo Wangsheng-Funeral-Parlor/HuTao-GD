@@ -1,12 +1,12 @@
-import MapAreaConfig from '#/ExcelBinOutput/MapAreaConfig'
-import MapAreaDataList from '$DT/MapAreaData'
-import Writer from './writer'
+import MapAreaConfig from "#/ExcelBinOutput/MapAreaConfig"
+import MapAreaDataList from "$DT/MapAreaData"
+import Writer from "./writer"
 
 export class MapAreaDataWriter extends Writer {
   declare data: MapAreaDataList
 
   constructor(ver: string) {
-    super('MapAreaData', ver)
+    super("MapAreaData", ver)
   }
 
   async generateData(): Promise<void> {
@@ -16,10 +16,10 @@ export class MapAreaDataWriter extends Writer {
 
     await mapAreaConfigLoader.load()
 
-    this.data = mapAreaConfigLoader.data.map(mapArea => ({
+    this.data = mapAreaConfigLoader.data.map((mapArea) => ({
       Id: mapArea.Id,
       SceneId: mapArea.SceneID,
-      Name: mapArea.Name
+      Name: mapArea.Name,
     }))
   }
 }

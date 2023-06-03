@@ -1,11 +1,11 @@
-import AvatarExcelConfigList from '$DT/ExcelBinOutput/AvatarExcelConfig'
-import Reader from './reader'
+import AvatarExcelConfigList from "$DT/ExcelBinOutput/AvatarExcelConfig"
+import Reader from "./reader"
 
 export class AvatarExcelConfigReader extends Reader {
   declare data: AvatarExcelConfigList
 
   constructor(ver: string) {
-    super('AvatarExcelConfigData', ver)
+    super("AvatarExcelConfigData", ver)
   }
 }
 

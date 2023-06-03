@@ -1,4 +1,4 @@
-function removeDuplicates<T>(array: T[], modify: boolean = true): T[] {
+function removeDuplicates<T>(array: T[], modify = true): T[] {
   let arr: T[]
 
   if (modify) {
@@ -25,7 +25,7 @@ function getRecurNameList(nameList: string[]): string[] {
   const wordCountMap: { [index: number]: number } = {}
   const patternMap: { [id: string]: number[] } = {}
 
-  for (let name of nameList) {
+  for (const name of nameList) {
     const words = getWords(name)
     const noDupWords = removeDuplicates(words, false)
 
@@ -34,14 +34,14 @@ function getRecurNameList(nameList: string[]): string[] {
     removeDuplicates(wordList)
 
     // Update word count
-    for (let word of noDupWords) {
+    for (const word of noDupWords) {
       const i = wordList.indexOf(word)
       wordCountMap[i] = (wordCountMap[i] || 0) + 1
     }
 
     // Map word to word index list
-    const pattern = words.map(word => wordList.indexOf(word))
-    const patternId = pattern.join('.')
+    const pattern = words.map((word) => wordList.indexOf(word))
+    const patternId = pattern.join(".")
 
     // Update pattern list
     patternMap[patternId] = pattern
@@ -49,15 +49,15 @@ function getRecurNameList(nameList: string[]): string[] {
 
   const maxCount = Math.max(...Object.values(wordCountMap))
   const recurWordIndexList: number[] = Object.entries(wordCountMap)
-    .filter(e => e[1] >= Math.floor(maxCount * 0.75))
-    .map(e => parseInt(e[0]))
+    .filter((e) => e[1] >= Math.floor(maxCount * 0.75))
+    .map((e) => parseInt(e[0]))
 
   const ret: string[] = []
 
-  for (let patternId in patternMap) {
+  for (const patternId in patternMap) {
     const pattern = patternMap[patternId]
-    if (recurWordIndexList.find(i => !pattern.includes(i))) continue
-    ret.push(pattern.map(i => wordList[i]).join('_'))
+    if (recurWordIndexList.find((i) => !pattern.includes(i))) continue
+    ret.push(pattern.map((i) => wordList[i]).join("_"))
   }
 
   return ret
@@ -67,7 +67,7 @@ export default function getRecurName(nameList: string[], prefix?: string | strin
   let lastLen = -1
   let lastNameList: string[] = []
 
-  if (nameList.length <= 1) return null
+  if (nameList?.length <= 1 || !nameList) return null
 
   while (nameList.length !== lastLen) {
     lastLen = nameList.length
@@ -83,8 +83,8 @@ export default function getRecurName(nameList: string[], prefix?: string | strin
   const wordList: string[] = []
   const wordCountMap: { [index: number]: number } = {}
 
-  for (let name of nameList) {
-    const words = getWords(name).filter(word => Array.isArray(prefix) ? !prefix.includes(word) : word !== prefix)
+  for (const name of nameList) {
+    const words = getWords(name).filter((word) => (Array.isArray(prefix) ? !prefix.includes(word) : word !== prefix))
     const noDupWords = removeDuplicates(words, false)
 
     // Update word list
@@ -92,7 +92,7 @@ export default function getRecurName(nameList: string[], prefix?: string | strin
     removeDuplicates(wordList)
 
     // Update word count
-    for (let word of noDupWords) {
+    for (const word of noDupWords) {
       const i = wordList.indexOf(word)
       wordCountMap[i] = (wordCountMap[i] || 0) + 1
     }
@@ -100,5 +100,5 @@ export default function getRecurName(nameList: string[], prefix?: string | strin
 
   const maxCount = Math.max(...Object.values(wordCountMap))
 
-  return wordList.filter((_word, i) => wordCountMap[i] === maxCount).join('_')
+  return wordList.filter((_word, i) => wordCountMap[i] === maxCount).join("_")
 }

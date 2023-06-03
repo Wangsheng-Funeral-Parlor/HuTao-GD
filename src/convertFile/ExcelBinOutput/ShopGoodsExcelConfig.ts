@@ -1,11 +1,11 @@
-import ShopGoodsExcelConfigList from '$DT/ExcelBinOutput/ShopGoodsExcelConfig'
-import Reader from './reader'
+import ShopGoodsExcelConfigList from "$DT/ExcelBinOutput/ShopGoodsExcelConfig"
+import Reader from "./reader"
 
 export class ShopGoodsExcelConfigReader extends Reader {
   declare data: ShopGoodsExcelConfigList
 
   constructor(ver: string) {
-    super('ShopGoodsExcelConfigData', ver)
+    super("ShopGoodsExcelConfigData", ver)
   }
 }
 

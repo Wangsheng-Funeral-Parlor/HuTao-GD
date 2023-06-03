@@ -1,6 +1,6 @@
-import CheckGround from '$DT/BinOutput/Config/CheckGround'
-import ConfigBornType from '$DT/BinOutput/Config/ConfigBornType'
-import ConfigBaseAbilityAction from '..'
+import CheckGround from "$DT/BinOutput/Config/CheckGround"
+import ConfigBornType from "$DT/BinOutput/Config/ConfigBornType"
+import ConfigBaseAbilityAction from ".."
 
 export default interface BaseCreateEntity extends ConfigBaseAbilityAction {
   OwnerIsTarget: boolean
@@ -13,7 +13,7 @@ export default interface BaseCreateEntity extends ConfigBaseAbilityAction {
 }
 
 export interface CreateGadget extends BaseCreateEntity {
-  $type: 'CreateGadget'
+  $type: "CreateGadget"
   GadgetID: number
   CampID: number
   CampTargetType: string
@@ -21,5 +21,5 @@ export interface CreateGadget extends BaseCreateEntity {
 }
 
 export interface CreateItem extends BaseCreateEntity {
-  $type: 'CreateItem'
+  $type: "CreateItem"
 }

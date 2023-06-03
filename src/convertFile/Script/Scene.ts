@@ -1,7 +1,7 @@
-import SceneScriptConfigMap from '$DT/Script/SceneScriptConfig'
-import deobfuscate from '@/utils/deobfuscate'
-import getJson from '@/utils/getJson'
-import Reader from './reader'
+import SceneScriptConfigMap from "$DT/Script/SceneScriptConfig"
+import deobfuscate from "@/utils/deobfuscate"
+import getJson from "@/utils/getJson"
+import Reader from "./reader"
 
 let map: any
 
@@ -9,7 +9,7 @@ export class SceneReader extends Reader {
   declare data: SceneScriptConfigMap
 
   constructor(ver: string) {
-    super('Scene', ver)
+    super("Scene", ver)
     map = getJson(`Map/${ver}.json`, {})
   }
 
@@ -20,10 +20,10 @@ export class SceneReader extends Reader {
     this.data = {}
     const { data } = this
 
-    for (let sceneId in scriptData) {
+    for (const sceneId in scriptData) {
       if (isNaN(parseInt(sceneId))) continue
 
-      console.log('Parsing scene script:', sceneId)
+      console.log("Parsing scene script:", sceneId)
 
       const sceneScriptData = scriptData[sceneId]
       const blockIds = Object.values(sceneScriptData[`scene${sceneId}`].blocks || {})
@@ -33,13 +33,13 @@ export class SceneReader extends Reader {
         config: sceneScriptData[`scene${sceneId}`].scene_config,
         group: Object.fromEntries(
           Object.entries(sceneScriptData)
-            .filter(e => e[0].indexOf(`scene${sceneId}_group`) === 0)
-            .map(e => {
-              const groupId = parseInt(e[0].replace(`scene${sceneId}_group`, ''))
+            .filter((e) => e[0].indexOf(`scene${sceneId}_group`) === 0)
+            .map((e) => {
+              const groupId = parseInt(e[0].replace(`scene${sceneId}_group`, ""))
               const groupData = e[1]
 
-              for (let key in groupData) {
-                if (key === 'InitConfig') continue
+              for (const key in groupData) {
+                if (key === "InitConfig") continue
                 groupData[key] = Object.values(groupData[key] || {})
               }
 
@@ -48,16 +48,16 @@ export class SceneReader extends Reader {
         ),
         block: Object.fromEntries(
           Object.entries(sceneScriptData)
-            .filter(e => e[0].indexOf(`scene${sceneId}_block`) === 0)
-            .map(e => {
-              const blockId = parseInt(e[0].replace(`scene${sceneId}_block`, ''))
+            .filter((e) => e[0].indexOf(`scene${sceneId}_block`) === 0)
+            .map((e) => {
+              const blockId = parseInt(e[0].replace(`scene${sceneId}_block`, ""))
               const blockData = Object.assign({}, e[1], { rect: blockRectMap[blockId] || null })
               return [blockId, blockData]
             })
-        )
+        ),
       }
 
-      console.log('Formatting scene script:', sceneId)
+      console.log("Formatting scene script:", sceneId)
 
       data[sceneId] = await deobfuscate(sceneData, map)
     }

@@ -1,13 +1,18 @@
-import { waitTick } from './asyncWait'
+import { waitTick } from "./asyncWait"
 
-interface ObfuscateMap { [id: string]: string }
+interface ObfuscateMap {
+  [id: string]: string
+}
 
 export function isObfuscated(str: string): boolean {
   return str.match(/^[A-Z]{11}$/) != null
 }
 
 function fixString(str: string): string {
-  return (str.slice(0, 1).toUpperCase() + str.slice(1)).replace((str.includes('Config') ? /_[a-zA-Z]/g : /_[a-z]/g), s => s.slice(1).toUpperCase())
+  return (str.slice(0, 1).toUpperCase() + str.slice(1)).replace(
+    str.includes("Config") ? /_[a-zA-Z]/g : /_[a-z]/g,
+    (s) => s.slice(1).toUpperCase()
+  )
 }
 
 function deobfuscateString(str: string, map: ObfuscateMap, unknown: string[] = []): string {
@@ -17,7 +22,7 @@ function deobfuscateString(str: string, map: ObfuscateMap, unknown: string[] = [
   if (deobfuscated == null) {
     if (!unknown.includes(str)) {
       unknown.push(str)
-      console.log('[ERROR]', 'Unknown obfuscated:', str)
+      console.log("[ERROR]", "Unknown obfuscated:", str)
     }
     return str
   }
@@ -33,13 +38,13 @@ export default async function deobfuscate(data: any, map: ObfuscateMap, unknown:
 
   let deobfuscated = {}
 
-  for (let k in data) {
-    let key = deobfuscateString(k, map, unknown)
+  for (const k in data) {
+    const key = deobfuscateString(k, map, unknown)
     let value = data[k]
 
-    if (typeof value === 'object') {
+    if (typeof value === "object") {
       value = await deobfuscate(value, map, unknown)
-    } else if (typeof value === 'string') {
+    } else if (typeof value === "string") {
       value = deobfuscateString(value, map, unknown)
     }
 

@@ -1,7 +1,7 @@
-import { DynamicVector } from '$DT/BinOutput/Common/DynamicNumber'
-import ConfigBaseBulletMoveAngle from '.'
+import { DynamicVector } from "$DT/BinOutput/Common/DynamicNumber"
+import ConfigBaseBulletMoveAngle from "."
 
 export default interface ConfigBulletMoveAngleRotating extends ConfigBaseBulletMoveAngle {
-  $type: 'ConfigBulletMoveAngleRotating'
+  $type: "ConfigBulletMoveAngleRotating"
   AngularVelocity: DynamicVector
 }

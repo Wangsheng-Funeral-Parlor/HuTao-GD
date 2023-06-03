@@ -1,11 +1,11 @@
-import ReliquaryLevelExcelConfigList from '$DT/ExcelBinOutput/ReliquaryLevelExcelConfig'
-import Reader from './reader'
+import ReliquaryLevelExcelConfigList from "$DT/ExcelBinOutput/ReliquaryLevelExcelConfig"
+import Reader from "./reader"
 
 export class ReliquaryLevelExcelConfigReader extends Reader {
   declare data: ReliquaryLevelExcelConfigList
 
   constructor(ver: string) {
-    super('ReliquaryLevelExcelConfigData', ver)
+    super("ReliquaryLevelExcelConfigData", ver)
   }
 }
 

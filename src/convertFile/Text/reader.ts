@@ -1,6 +1,6 @@
 import { fileExists, readFile } from "@/utils/fileSystem"
 
-const DATA_DIR = 'InputData/%ver%/Text'
+const DATA_DIR = "InputData/%ver%/Text"
 
 export default class Reader {
   path: string
@@ -20,20 +20,20 @@ export default class Reader {
 
   async load() {
     const { path, version } = this
-    const filePath = `${DATA_DIR.replace('%ver%', version)}/${path}.txt`
+    const filePath = `${DATA_DIR.replace("%ver%", version)}/${path}.txt`
 
-    console.log('Reading:', filePath)
+    console.log("Reading:", filePath)
 
     this.data = []
 
-    if (!await fileExists(filePath)) return
+    if (!(await fileExists(filePath))) return
 
     const { columnNames, data } = this
     const rows = (await readFile(filePath))
-      .toString('utf8')
-      .split('\n')
+      .toString("utf8")
+      .split("\n")
       .slice(1)
-      .map(r => r.split('\t'))
+      .map((r) => r.split("\t"))
 
     for (const cols of rows) {
       const row = {}

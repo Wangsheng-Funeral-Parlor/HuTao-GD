@@ -1,10 +1,10 @@
-import { DynamicVector } from '$DT/BinOutput/Common/DynamicNumber'
-import ConfigBaseMove from '.'
-import ConfigIgnoreCollision from '../../ConfigIgnoreCollision'
-import ConfigMoveDisableCollision from '../../ConfigMoveDisableCollision'
+import { DynamicVector } from "$DT/BinOutput/Common/DynamicNumber"
+import ConfigBaseMove from "."
+import ConfigIgnoreCollision from "../../ConfigIgnoreCollision"
+import ConfigMoveDisableCollision from "../../ConfigMoveDisableCollision"
 
 export default interface ConfigFollowMove extends ConfigBaseMove {
-  $type: 'ConfigFollowMove'
+  $type: "ConfigFollowMove"
   Target: string
   GroupTargetInstanceId: number
   AttachPoint: string

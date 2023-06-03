@@ -1,8 +1,8 @@
-import ConfigBaseMove from '.'
-import ConfigMoveSmoothedSpeed from '../../ConfigMoveSmoothedSpeed'
+import ConfigBaseMove from "."
+import ConfigMoveSmoothedSpeed from "../../ConfigMoveSmoothedSpeed"
 
 export default interface ConfigAnimatorMove extends ConfigBaseMove {
-  $type: 'ConfigAnimatorMove'
+  $type: "ConfigAnimatorMove"
   InitWithGroundHitCheck: boolean
   SmoothedSpeed: ConfigMoveSmoothedSpeed
   MoveOnGround: boolean

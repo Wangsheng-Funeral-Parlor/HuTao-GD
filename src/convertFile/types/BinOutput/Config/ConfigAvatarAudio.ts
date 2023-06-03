@@ -1,6 +1,6 @@
-import ConfigWwiseString from './ConfigWwiseString'
-import ConfigCombatSpeech from './ConfigCombatSpeech'
-import ConfigMoveStateAudio from './ConfigMoveStateAudio'
+import ConfigWwiseString from "./ConfigWwiseString"
+import ConfigCombatSpeech from "./ConfigCombatSpeech"
+import ConfigMoveStateAudio from "./ConfigMoveStateAudio"
 
 export default interface ConfigAvatarAudio {
   MoveStateAudio: ConfigMoveStateAudio

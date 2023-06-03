@@ -1,7 +1,7 @@
 import deobfuscate from "@/utils/deobfuscate"
 import getJson from "@/utils/getJson"
 
-const DATA_DIR = 'InputData/%ver%/ExcelBinOutput'
+const DATA_DIR = "InputData/%ver%/ExcelBinOutput"
 let map: any
 
 export default class Reader {
@@ -23,9 +23,9 @@ export default class Reader {
 
   async load() {
     const { path, version, defaultData } = this
-    const filePath = `${DATA_DIR.replace('%ver%', version)}/${path}.json`
+    const filePath = `${DATA_DIR.replace("%ver%", version)}/${path}.json`
 
-    console.log('Reading:', filePath)
+    console.log("Reading:", filePath)
     this.data = await deobfuscate(getJson(filePath, defaultData), map)
   }
 }

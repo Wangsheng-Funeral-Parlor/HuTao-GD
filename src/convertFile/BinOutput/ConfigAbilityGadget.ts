@@ -1,9 +1,9 @@
-import ConfigAbility from '$DT/BinOutput/Config/ConfigAbility'
-import { ConfigAbilityReader } from './ConfigAbility'
+import ConfigAbility from "$DT/BinOutput/Config/ConfigAbility"
+import { ConfigAbilityReader } from "./ConfigAbility"
 
 export class ConfigAbilityGadgetReader extends ConfigAbilityReader {
   constructor(ver: string) {
-    super(ver, '/Temp/GadgetAbilities')
+    super(ver, "/Temp/GadgetAbilities")
   }
 
   getName(name: string, abilityConfig: { [override: string]: ConfigAbility }[]): string {

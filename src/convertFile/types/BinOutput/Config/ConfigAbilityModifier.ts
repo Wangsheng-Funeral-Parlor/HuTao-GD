@@ -1,8 +1,8 @@
-import { DynamicFloat } from '$DT/BinOutput/Common/DynamicNumber'
-import ConfigAbilityAction from './ConfigAbility/Action'
-import ConfigAbilityMixin from './ConfigAbility/Mixin'
-import ConfigAbilityStateOption from './ConfigAbilityStateOption'
-import ConfigModifierStackingOption from './ConfigModifierStackingOption'
+import { DynamicFloat } from "$DT/BinOutput/Common/DynamicNumber"
+import ConfigAbilityAction from "./ConfigAbility/Action"
+import ConfigAbilityMixin from "./ConfigAbility/Mixin"
+import ConfigAbilityStateOption from "./ConfigAbilityStateOption"
+import ConfigModifierStackingOption from "./ConfigModifierStackingOption"
 
 export default interface ConfigAbilityModifier {
   TimeScale: string

@@ -1,11 +1,11 @@
-import MonsterTitleExcelConfigList from '$DT/ExcelBinOutput/MonsterTitleExcelConfig'
-import Reader from './reader'
+import MonsterTitleExcelConfigList from "$DT/ExcelBinOutput/MonsterTitleExcelConfig"
+import Reader from "./reader"
 
 export class MonsterTitleExcelConfigReader extends Reader {
   declare data: MonsterTitleExcelConfigList
 
   constructor(ver: string) {
-    super('MonsterTitleExcelConfigData', ver)
+    super("MonsterTitleExcelConfigData", ver)
   }
 }
 

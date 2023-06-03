@@ -4,7 +4,7 @@ import { readdirSync } from "fs"
 import { join } from "path"
 import { cwd } from "process"
 
-const DATA_DIR = 'InputData/%ver%/BinOutput'
+const DATA_DIR = "InputData/%ver%/BinOutput"
 let map: any
 
 export default class Reader {
@@ -24,24 +24,24 @@ export default class Reader {
 
   async load() {
     const { path, version, defaultData } = this
-    const filePath = `${DATA_DIR.replace('%ver%', version)}/${path}.json`
+    const filePath = `${DATA_DIR.replace("%ver%", version)}/${path}.json`
 
-    console.log('Reading:', filePath)
+    console.log("Reading:", filePath)
     this.data = await deobfuscate(getJson(filePath, defaultData), map)
   }
 
   async loadDir() {
     const { path, version, defaultData } = this
-    const dirPath = `${DATA_DIR.replace('%ver%', version)}/${path}`
+    const dirPath = `${DATA_DIR.replace("%ver%", version)}/${path}`
     const fileList = readdirSync(join(cwd(), dirPath))
 
-    const data = this.data = {}
+    const data = (this.data = {})
 
-    for (let file of fileList) {
+    for (const file of fileList) {
       const filePath = `${dirPath}/${file}`
 
-      console.log('Reading:', filePath)
-      data[file.replace('.json', '')] = await deobfuscate(getJson(filePath, defaultData), map)
+      console.log("Reading:", filePath)
+      data[file.replace(".json", "")] = await deobfuscate(getJson(filePath, defaultData), map)
     }
   }
 }

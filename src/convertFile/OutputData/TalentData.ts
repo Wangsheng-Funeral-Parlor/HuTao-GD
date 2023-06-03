@@ -1,25 +1,25 @@
-import ConfigTalentAvatar from '#/BinOutput/ConfigTalentAvatar'
-import ConfigTalentEquip from '#/BinOutput/ConfigTalentEquip'
-import ConfigTalentRelic from '#/BinOutput/ConfigTalentRelic'
-import ConfigTalentTeam from '#/BinOutput/ConfigTalentTeam'
-import AvatarTalentExcelConfig from '#/ExcelBinOutput/AvatarTalentExcelConfig'
-import EquipAffixExcelConfig from '#/ExcelBinOutput/EquipAffixExcelConfig'
-import TeamResonanceExcelConfig from '#/ExcelBinOutput/TeamResonanceExcelConfig'
-import TalentDataGroup from '$DT/TalentData'
-import Writer from './writer'
+import ConfigTalentAvatar from "#/BinOutput/ConfigTalentAvatar"
+import ConfigTalentEquip from "#/BinOutput/ConfigTalentEquip"
+import ConfigTalentRelic from "#/BinOutput/ConfigTalentRelic"
+import ConfigTalentTeam from "#/BinOutput/ConfigTalentTeam"
+import AvatarTalentExcelConfig from "#/ExcelBinOutput/AvatarTalentExcelConfig"
+import EquipAffixExcelConfig from "#/ExcelBinOutput/EquipAffixExcelConfig"
+import TeamResonanceExcelConfig from "#/ExcelBinOutput/TeamResonanceExcelConfig"
+import TalentDataGroup from "$DT/TalentData"
+import Writer from "./writer"
 
 export class TalentDataWriter extends Writer {
   declare data: TalentDataGroup
 
   constructor(ver: string) {
-    super('TalentData', ver)
+    super("TalentData", ver)
   }
 
   async generateData(): Promise<void> {
     this.data = {
       Avatar: [],
       Equip: [],
-      Team: []
+      Team: [],
     }
 
     const { version, data } = this
@@ -57,7 +57,7 @@ export class TalentDataWriter extends Writer {
         AddProps,
         ParamList,
 
-        PrevTalent
+        PrevTalent,
       } = avatarTalent
 
       const talentConfig = configTalentAvatar[OpenConfig]
@@ -71,7 +71,7 @@ export class TalentDataWriter extends Writer {
         ParamList,
         Config: talentConfig,
 
-        PrevTalent
+        PrevTalent,
       })
     }
 
@@ -85,7 +85,7 @@ export class TalentDataWriter extends Writer {
         AddProps,
         ParamList,
 
-        Level
+        Level,
       } = equipTalent
 
       const talentConfig = configTalentEquip[OpenConfig] || configTalentRelic[OpenConfig]
@@ -100,7 +100,7 @@ export class TalentDataWriter extends Writer {
         ParamList,
         Config: talentConfig,
 
-        Level
+        Level,
       })
     }
 
@@ -122,7 +122,7 @@ export class TalentDataWriter extends Writer {
         GrassAvatarCount,
         IceAvatarCount,
         RockAvatarCount,
-        Cond
+        Cond,
       } = teamTalent
 
       const talentConfig = configTalentTeam[OpenConfig]
@@ -145,7 +145,7 @@ export class TalentDataWriter extends Writer {
         GrassAvatarCount,
         IceAvatarCount,
         RockAvatarCount,
-        Cond
+        Cond,
       })
     }
   }

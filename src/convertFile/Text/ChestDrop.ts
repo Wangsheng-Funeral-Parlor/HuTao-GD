@@ -1,18 +1,11 @@
-import ChestDropList from '$DT/Text/ChestDrop'
-import Reader from './reader'
+import ChestDropList from "$DT/Text/ChestDrop"
+import Reader from "./reader"
 
 export class ChestDropReader extends Reader {
   declare data: ChestDropList
 
   constructor(ver: string) {
-    super('ChestDropData', ver, [
-      'MinLevel',
-      'Index',
-      'DropId',
-      'DropCount',
-      'SourceType',
-      'Category'
-    ])
+    super("ChestDropData", ver, ["MinLevel", "Index", "DropId", "DropCount", "SourceType", "Category"])
   }
 }
 

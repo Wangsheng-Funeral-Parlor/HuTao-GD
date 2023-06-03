@@ -1,11 +1,11 @@
-import DungeonRosterConfigList from '$DT/ExcelBinOutput/DungeonRosterConfig'
-import Reader from './reader'
+import DungeonRosterConfigList from "$DT/ExcelBinOutput/DungeonRosterConfig"
+import Reader from "./reader"
 
 export class DungeonRosterConfigReader extends Reader {
   declare data: DungeonRosterConfigList
 
   constructor(ver: string) {
-    super('DungeonRosterConfigData', ver)
+    super("DungeonRosterConfigData", ver)
   }
 }
 

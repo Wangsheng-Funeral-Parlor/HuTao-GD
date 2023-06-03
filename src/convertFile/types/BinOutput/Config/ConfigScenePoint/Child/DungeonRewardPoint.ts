@@ -1,8 +1,8 @@
-import { DynamicVector } from '$DT/BinOutput/Common/DynamicNumber'
-import ConfigBaseScenePoint from '.'
+import { DynamicVector } from "$DT/BinOutput/Common/DynamicNumber"
+import ConfigBaseScenePoint from "."
 
 export default interface DungeonRewardPoint extends ConfigBaseScenePoint {
-  $type: 'DungeonRewardPoint'
+  $type: "DungeonRewardPoint"
   IsActive: boolean
   DropPointList: DynamicVector[]
 }

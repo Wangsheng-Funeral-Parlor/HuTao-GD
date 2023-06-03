@@ -1,14 +1,14 @@
-import ConfigAvatar from '#/BinOutput/ConfigAvatar'
-import AvatarCostumeExcelConfig from '#/ExcelBinOutput/AvatarCostumeExcelConfig'
-import AvatarExcelConfig from '#/ExcelBinOutput/AvatarExcelConfig'
-import AvatarFlycloakExcelConfig from '#/ExcelBinOutput/AvatarFlycloakExcelConfig'
-import FetterInfoExcelConfig from '#/ExcelBinOutput/FetterInfoExcelConfig'
-import FettersExcelConfig from '#/ExcelBinOutput/FettersExcelConfig'
-import FetterStoryExcelConfig from '#/ExcelBinOutput/FetterStoryExcelConfig'
-import AvatarDataGroup from '$DT/AvatarData'
-import FetterConfig from '$DT/ExcelBinOutput/Common/FetterConfig'
-import FetterDataList from '$DT/FetterData'
-import Writer from './writer'
+import ConfigAvatar from "#/BinOutput/ConfigAvatar"
+import AvatarCostumeExcelConfig from "#/ExcelBinOutput/AvatarCostumeExcelConfig"
+import AvatarExcelConfig from "#/ExcelBinOutput/AvatarExcelConfig"
+import AvatarFlycloakExcelConfig from "#/ExcelBinOutput/AvatarFlycloakExcelConfig"
+import FetterInfoExcelConfig from "#/ExcelBinOutput/FetterInfoExcelConfig"
+import FettersExcelConfig from "#/ExcelBinOutput/FettersExcelConfig"
+import FetterStoryExcelConfig from "#/ExcelBinOutput/FetterStoryExcelConfig"
+import AvatarDataGroup from "$DT/AvatarData"
+import FetterConfig from "$DT/ExcelBinOutput/Common/FetterConfig"
+import FetterDataList from "$DT/FetterData"
+import Writer from "./writer"
 
 function getFetterConfig(data: FetterConfig): FetterConfig {
   const { FetterId, AvatarId, OpenConds, FinishConds } = data
@@ -17,7 +17,7 @@ function getFetterConfig(data: FetterConfig): FetterConfig {
     FetterId,
     AvatarId,
     OpenConds,
-    FinishConds
+    FinishConds,
   }
 }
 
@@ -25,14 +25,14 @@ export class AvatarDataWriter extends Writer {
   declare data: AvatarDataGroup
 
   constructor(ver: string) {
-    super('AvatarData', ver)
+    super("AvatarData", ver)
   }
 
   async generateData(): Promise<void> {
     this.data = {
       Avatar: [],
       Costume: [],
-      Flycloak: []
+      Flycloak: [],
     }
 
     const { version, data } = this
@@ -61,7 +61,7 @@ export class AvatarDataWriter extends Writer {
     const { data: avatarCostumeExcelConfig } = avatarCostumeExcelConfigLoader
     const { data: avatarFlycloakExcelConfig } = avatarFlycloakExcelConfigLoader
 
-    for (let avatar of avatarExcelConfig) {
+    for (const avatar of avatarExcelConfig) {
       const {
         UseType,
         BodyType,
@@ -99,7 +99,7 @@ export class AvatarDataWriter extends Writer {
         ControllerPathHashSuffix,
         ControllerPathHashPre,
         ControllerPathRemoteHashSuffix,
-        ControllerPathRemoteHashPre
+        ControllerPathRemoteHashPre,
       } = avatar
 
       if (UseType == null) continue
@@ -109,9 +109,9 @@ export class AvatarDataWriter extends Writer {
       const fetters: FetterDataList = []
 
       fetters.push(
-        ...fetterInfoExcelConfig.filter(f => f.AvatarId === Id).map(getFetterConfig),
-        ...fettersExcelConfig.filter(f => f.AvatarId === Id).map(getFetterConfig),
-        ...fetterStoryExcelConfig.filter(f => f.AvatarId === Id).map(getFetterConfig)
+        ...fetterInfoExcelConfig.filter((f) => f.AvatarId === Id).map(getFetterConfig),
+        ...fettersExcelConfig.filter((f) => f.AvatarId === Id).map(getFetterConfig),
+        ...fetterStoryExcelConfig.filter((f) => f.AvatarId === Id).map(getFetterConfig)
       )
 
       data.Avatar.push({
@@ -153,20 +153,20 @@ export class AvatarDataWriter extends Writer {
         ControllerPathRemoteHashPre,
 
         Config: avatarConfig,
-        Fetters: fetters
+        Fetters: fetters,
       })
     }
 
-    for (let costume of avatarCostumeExcelConfig) {
+    for (const costume of avatarCostumeExcelConfig) {
       data.Costume.push({
-        Id: costume.CostumeId,
-        AvatarId: costume.AvatarId
+        Id: costume.CostumeId || costume.SkinId,
+        AvatarId: costume.CharacterId || costume.AvatarId,
       })
     }
 
-    for (let flycloak of avatarFlycloakExcelConfig) {
+    for (const flycloak of avatarFlycloakExcelConfig) {
       data.Flycloak.push({
-        Id: flycloak.FlycloakId
+        Id: flycloak.FlycloakId,
       })
     }
   }

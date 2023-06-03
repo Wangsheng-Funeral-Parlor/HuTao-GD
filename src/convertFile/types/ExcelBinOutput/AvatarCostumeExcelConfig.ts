@@ -1,9 +1,11 @@
 export interface AvatarCostumeExcelConfig {
-  CostumeId: number
+  CostumeId?: number
+  SkinId?: number
   NameTextMapHash: number
   DescTextMapHash: number
   ItemId?: number
-  AvatarId: number
+  CharacterId: number
+  AvatarId?: number
   JsonName: string
   IconName: string
   SideIconName: string

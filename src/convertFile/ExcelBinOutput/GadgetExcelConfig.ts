@@ -1,11 +1,11 @@
-import GadgetExcelConfigList from '$DT/ExcelBinOutput/GadgetExcelConfig'
-import Reader from './reader'
+import GadgetExcelConfigList from "$DT/ExcelBinOutput/GadgetExcelConfig"
+import Reader from "./reader"
 
 export class GadgetExcelConfigReader extends Reader {
   declare data: GadgetExcelConfigList
 
   constructor(ver: string) {
-    super('GadgetExcelConfigData', ver)
+    super("GadgetExcelConfigData", ver)
   }
 }
 

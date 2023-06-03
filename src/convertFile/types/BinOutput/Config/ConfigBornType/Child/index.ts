@@ -1,6 +1,6 @@
-import { DynamicVector } from '$DT/BinOutput/Common/DynamicNumber'
-import BornRandom from '../../BornRandom/BornRandom'
-import ConfigBornDirectionType from '../../ConfigBornDirectionType'
+import { DynamicVector } from "$DT/BinOutput/Common/DynamicNumber"
+import BornRandom from "../../BornRandom/BornRandom"
+import ConfigBornDirectionType from "../../ConfigBornDirectionType"
 
 export default interface ConfigBaseBornType {
   Offset: DynamicVector

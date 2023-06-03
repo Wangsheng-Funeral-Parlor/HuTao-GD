@@ -1,21 +1,21 @@
-import WeaponExcelConfig from '#/ExcelBinOutput/WeaponExcelConfig'
-import WeaponLevelExcelConfig from '#/ExcelBinOutput/WeaponLevelExcelConfig'
-import WeaponPromoteExcelConfig from '#/ExcelBinOutput/WeaponPromoteExcelConfig'
-import WeaponDataGroup from '$DT/WeaponData'
-import Writer from './writer'
+import WeaponExcelConfig from "#/ExcelBinOutput/WeaponExcelConfig"
+import WeaponLevelExcelConfig from "#/ExcelBinOutput/WeaponLevelExcelConfig"
+import WeaponPromoteExcelConfig from "#/ExcelBinOutput/WeaponPromoteExcelConfig"
+import WeaponDataGroup from "$DT/WeaponData"
+import Writer from "./writer"
 
 export class WeaponDataWriter extends Writer {
   declare data: WeaponDataGroup
 
   constructor(ver: string) {
-    super('WeaponData', ver)
+    super("WeaponData", ver)
   }
 
   async generateData(): Promise<void> {
     this.data = {
       Weapon: [],
       Level: [],
-      Promote: []
+      Promote: [],
     }
 
     const { data, version } = this
@@ -32,7 +32,7 @@ export class WeaponDataWriter extends Writer {
     const { data: weaponLevelExcelConfig } = weaponLevelExcelConfigLoader
     const { data: weaponPromoteExcelConfig } = weaponPromoteExcelConfigLoader
 
-    for (let weapon of weaponExcelConfig) {
+    for (const weapon of weaponExcelConfig) {
       const {
         WeaponType,
         RankLevel,
@@ -55,7 +55,7 @@ export class WeaponDataWriter extends Writer {
         DestroyRule,
         InitialLockState,
         AwakenMaterial,
-        EnhanceRule
+        EnhanceRule,
       } = weapon
 
       data.Weapon.push({
@@ -80,23 +80,20 @@ export class WeaponDataWriter extends Writer {
         DestroyRule,
         InitialLockState,
         AwakenMaterial,
-        EnhanceRule
+        EnhanceRule,
       })
     }
 
-    for (let weaponLevel of weaponLevelExcelConfig) {
-      const {
-        Level,
-        RequiredExps
-      } = weaponLevel
+    for (const weaponLevel of weaponLevelExcelConfig) {
+      const { Level, RequiredExps } = weaponLevel
 
       data.Level.push({
         Level,
-        RequiredExps
+        RequiredExps,
       })
     }
 
-    for (let weaponPromote of weaponPromoteExcelConfig) {
+    for (const weaponPromote of weaponPromoteExcelConfig) {
       const {
         WeaponPromoteId,
         CostItems,
@@ -105,18 +102,18 @@ export class WeaponDataWriter extends Writer {
 
         PromoteLevel,
         RequiredPlayerLevel,
-        CoinCost
+        CoinCost,
       } = weaponPromote
 
       data.Promote.push({
         Id: WeaponPromoteId,
-        CostItems: (CostItems.filter(item => item.Id != null) as { Id: number, Count: number }[]),
+        CostItems: CostItems.filter((item) => item.Id != null) as { Id: number; Count: number }[],
         AddProps,
         UnlockMaxLevel,
 
         PromoteLevel,
         RequiredPlayerLevel,
-        CoinCost
+        CoinCost,
       })
     }
   }

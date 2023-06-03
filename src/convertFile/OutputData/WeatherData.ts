@@ -1,13 +1,13 @@
-import WeatherExcelConfig from '#/ExcelBinOutput/WeatherExcelConfig'
-import WeatherTemplateExcelConfig from '#/ExcelBinOutput/WeatherTemplateExcelConfig'
-import WeatherDataList, { WeatherTemplateData } from '$DT/WeatherData'
-import Writer from './writer'
+import WeatherExcelConfig from "#/ExcelBinOutput/WeatherExcelConfig"
+import WeatherTemplateExcelConfig from "#/ExcelBinOutput/WeatherTemplateExcelConfig"
+import WeatherDataList, { WeatherTemplateData } from "$DT/WeatherData"
+import Writer from "./writer"
 
 export class WeatherDataWriter extends Writer {
   declare data: WeatherDataList
 
   constructor(ver: string) {
-    super('WeatherData', ver)
+    super("WeatherData", ver)
   }
 
   async generateData(): Promise<void> {
@@ -37,12 +37,12 @@ export class WeatherDataWriter extends Writer {
 
         GadgetID,
         IsDefaultValid,
-        IsUseDefault
+        IsUseDefault,
       } = weather
 
       const templates: WeatherTemplateData[] = weatherTemplateExcelConfig
-        .filter(template => template.TemplateName === TemplateName)
-        .map(template => ({
+        .filter((template) => template.TemplateName === TemplateName)
+        .map((template) => ({
           WeatherType: template.WeatherType,
 
           SunnyProb: template.SunnyProb,
@@ -50,7 +50,7 @@ export class WeatherDataWriter extends Writer {
           RainProb: template.RainProb,
           ThunderstormProb: template.ThunderstormProb,
           SnowProb: template.SnowProb,
-          MistProb: template.MistProb
+          MistProb: template.MistProb,
         }))
 
       data.push({
@@ -65,7 +65,7 @@ export class WeatherDataWriter extends Writer {
 
         GadgetID,
         IsDefaultValid,
-        IsUseDefault
+        IsUseDefault,
       })
     }
   }

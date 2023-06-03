@@ -1,20 +1,20 @@
-import DungeonChallengeConfig from '#/ExcelBinOutput/DungeonChallengeConfig'
-import DungeonElementChallengeExcelConfig from '#/ExcelBinOutput/DungeonElementChallengeExcelConfig'
-import DungeonEntryExcelConfig from '#/ExcelBinOutput/DungeonEntryExcelConfig'
-import DungeonExcelConfig from '#/ExcelBinOutput/DungeonExcelConfig'
-import DungeonLevelEntityConfig from '#/ExcelBinOutput/DungeonLevelEntityConfig'
-import DungeonMapAreaExcelConfig from '#/ExcelBinOutput/DungeonMapAreaExcelConfig'
-import DungeonPassExcelConfig from '#/ExcelBinOutput/DungeonPassExcelConfig'
-import DungeonRosterConfig from '#/ExcelBinOutput/DungeonRosterConfig'
-import DungeonSerialConfig from '#/ExcelBinOutput/DungeonSerialConfig'
-import DungeonDataList from '$DT/DungeonData'
-import Writer from './writer'
+import DungeonChallengeConfig from "#/ExcelBinOutput/DungeonChallengeConfig"
+import DungeonElementChallengeExcelConfig from "#/ExcelBinOutput/DungeonElementChallengeExcelConfig"
+import DungeonEntryExcelConfig from "#/ExcelBinOutput/DungeonEntryExcelConfig"
+import DungeonExcelConfig from "#/ExcelBinOutput/DungeonExcelConfig"
+import DungeonLevelEntityConfig from "#/ExcelBinOutput/DungeonLevelEntityConfig"
+import DungeonMapAreaExcelConfig from "#/ExcelBinOutput/DungeonMapAreaExcelConfig"
+import DungeonPassExcelConfig from "#/ExcelBinOutput/DungeonPassExcelConfig"
+import DungeonRosterConfig from "#/ExcelBinOutput/DungeonRosterConfig"
+import DungeonSerialConfig from "#/ExcelBinOutput/DungeonSerialConfig"
+import DungeonDataList from "$DT/DungeonData"
+import Writer from "./writer"
 
 export class DungeonDataWriter extends Writer {
   declare data: DungeonDataList
 
   constructor(ver: string) {
-    super('DungeonData', ver)
+    super("DungeonData", ver)
   }
 
   async generateData(): Promise<void> {
@@ -22,7 +22,8 @@ export class DungeonDataWriter extends Writer {
       Dungeon: [],
       Entry: [],
       MapArea: [],
-      Roster: []
+      Roster: [],
+      Challenge: [],
     }
 
     const { data, version } = this
@@ -57,7 +58,38 @@ export class DungeonDataWriter extends Writer {
     const { data: dungeonMapAreaExcelConfig } = dungeonMapAreaExcelConfigLoader
     const { data: dungeonRosterConfig } = dungeonRosterConfigLoader
 
-    for (let dungeon of dungeonExcelConfig) {
+    for (const challenge of dungeonChallengeConfig) {
+      const {
+        Id,
+        ChallengeType,
+        NoSuccessHint,
+        NoFailHint,
+        IsBlockTopTimer,
+        IsSuccessWhenNotSettled,
+        InterruptButtonType,
+        SubChallengeFadeOutRule,
+        SubChallengeFadeOutDelayTime,
+        SubChallengeBannerRule,
+        RecordType,
+        ActivitySkillID,
+      } = challenge
+
+      this.data.Challenge.push({
+        Id,
+        ChallengeType,
+        NoSuccessHint,
+        NoFailHint,
+        IsBlockTopTimer,
+        IsSuccessWhenNotSettled,
+        InterruptButtonType,
+        SubChallengeFadeOutRule,
+        SubChallengeFadeOutDelayTime,
+        SubChallengeBannerRule,
+        RecordType,
+        ActivitySkillID,
+      })
+    }
+    for (const dungeon of dungeonExcelConfig) {
       const {
         Id,
         Type,
@@ -94,14 +126,14 @@ export class DungeonDataWriter extends Writer {
         ReviveIntervalTime,
         StatueCostID,
         StatueCostCount,
-        StatueDrop
+        StatueDrop,
       } = dungeon
 
-      const challenge = dungeonChallengeConfig.find(d => d.Id === Id)
-      const elementChallenge = dungeonElementChallengeExcelConfig.find(d => d.DungeonId === Id)
-      const levelEntity = dungeonLevelEntityConfig.find(d => d.Id === Id)
-      const pass = dungeonPassExcelConfig.find(d => d.Id === Id)
-      const serial = dungeonSerialConfig.find(d => d.Id === Id)
+      const challenge = dungeonChallengeConfig.find((d) => d.Id === Id)
+      const elementChallenge = dungeonElementChallengeExcelConfig.find((d) => d.DungeonId === Id)
+      const levelEntity = dungeonLevelEntityConfig.find((d) => d.Id === Id)
+      const pass = dungeonPassExcelConfig.find((d) => d.Id === Id)
+      const serial = dungeonSerialConfig.find((d) => d.Id === Id)
 
       data.Dungeon.push({
         Id,
@@ -141,45 +173,56 @@ export class DungeonDataWriter extends Writer {
         StatueCostCount,
         StatueDrop,
 
-        Challenge: challenge ? {
-          ChallengeType: challenge.ChallengeType,
-          NoSuccessHint: challenge.NoSuccessHint,
-          NoFailHint: !!challenge.NoFailHint,
-          IsBlockTopTimer: !!challenge.IsBlockTopTimer,
-          IsSuccessWhenNotSettled: !!challenge.IsSuccessWhenNotSettled,
+        Challenge: challenge
+          ? {
+              Id: challenge.Id,
+              ChallengeType: challenge.ChallengeType,
+              NoSuccessHint: challenge.NoSuccessHint,
+              NoFailHint: !!challenge.NoFailHint,
+              IsBlockTopTimer: !!challenge.IsBlockTopTimer,
+              IsSuccessWhenNotSettled: !!challenge.IsSuccessWhenNotSettled,
 
-          InterruptButtonType: challenge.InterruptButtonType,
-          SubChallengeFadeOutRule: challenge.SubChallengeFadeOutRule,
-          SubChallengeFadeOutDelayTime: challenge.SubChallengeFadeOutDelayTime,
-          SubChallengeBannerRule: challenge.SubChallengeBannerRule,
-          RecordType: challenge.RecordType,
-          ActivitySkillID: challenge.ActivitySkillID
-        } : null,
+              InterruptButtonType: challenge.InterruptButtonType,
+              SubChallengeFadeOutRule: challenge.SubChallengeFadeOutRule,
+              SubChallengeFadeOutDelayTime: challenge.SubChallengeFadeOutDelayTime,
+              SubChallengeBannerRule: challenge.SubChallengeBannerRule,
+              RecordType: challenge.RecordType,
+              ActivitySkillID: challenge.ActivitySkillID,
+            }
+          : null,
 
-        ElementChallenge: elementChallenge ? {
-          TrialAvatarId: elementChallenge.TrialAvatarId,
-          TutorialId: elementChallenge.TutorialId
-        } : null,
+        ElementChallenge: elementChallenge
+          ? {
+              TrialAvatarId: elementChallenge.TrialAvatarId,
+              TutorialId: elementChallenge.TutorialId,
+            }
+          : null,
 
-        LevelEntity: levelEntity ? {
-          ClientId: levelEntity.ClientId,
-          LevelConfigName: levelEntity.LevelConfigName,
-          Show: !!levelEntity.Show
-        } : null,
+        LevelEntity: levelEntity
+          ? {
+              ClientId: levelEntity.ClientId,
+              LevelConfigName: levelEntity.LevelConfigName,
+              Show: !!levelEntity.Show,
+            }
+          : null,
 
-        Pass: pass ? {
-          Conds: pass.Conds,
-          LogicType: pass.LogicType
-        } : null,
+        Pass: pass
+          ? {
+              Conds: pass.Conds,
+              LogicType: pass.LogicType,
+            }
+          : null,
 
-        Serial: serial ? {
-          MaxTakeNum: serial.MaxTakeNum,
-          TakeCost: serial.TakeCost
-        } : null
+        Serial: serial
+          ? {
+              MaxTakeNum: serial.MaxTakeNum,
+              TakeCost: serial.TakeCost,
+            }
+          : null,
       })
     }
 
-    for (let dungeonEntry of dungeonEntryExcelConfig) {
+    for (const dungeonEntry of dungeonEntryExcelConfig) {
       const {
         Id,
         SceneId,
@@ -194,7 +237,7 @@ export class DungeonDataWriter extends Writer {
         SystemOpenUiId,
         RewardDataId,
         IsDailyRefresh,
-        IsDefaultOpen
+        IsDefaultOpen,
       } = dungeonEntry
 
       data.Entry.push({
@@ -211,37 +254,28 @@ export class DungeonDataWriter extends Writer {
         SystemOpenUiId,
         RewardDataId,
         IsDailyRefresh: !!IsDailyRefresh,
-        IsDefaultOpen: !!IsDefaultOpen
+        IsDefaultOpen: !!IsDefaultOpen,
       })
     }
 
-    for (let dungeonMapArea of dungeonMapAreaExcelConfig) {
-      const {
-        DungeonID,
-        AreaID
-      } = dungeonMapArea
+    for (const dungeonMapArea of dungeonMapAreaExcelConfig) {
+      const { DungeonID, AreaID } = dungeonMapArea
 
       data.MapArea.push({
         DungeonID,
-        AreaID
+        AreaID,
       })
     }
 
-    for (let dungeonRoster of dungeonRosterConfig) {
-      const {
-        Id,
-        OpenTimeStr,
-        CycleTime,
-        CycleType,
-        RosterPool
-      } = dungeonRoster
+    for (const dungeonRoster of dungeonRosterConfig) {
+      const { Id, OpenTimeStr, CycleTime, CycleType, RosterPool } = dungeonRoster
 
       data.Roster.push({
         Id,
         OpenTimeStr,
         CycleTime,
         CycleType,
-        RosterPool
+        RosterPool,
       })
     }
   }

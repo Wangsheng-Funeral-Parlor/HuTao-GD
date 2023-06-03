@@ -1,9 +1,9 @@
-import { DynamicVector } from '$DT/BinOutput/Common/DynamicNumber'
-import DungeonQuestCondition from '../../DungeonQuestCondition'
-import SceneTransPoint from './SceneTransPoint'
+import { DynamicVector } from "$DT/BinOutput/Common/DynamicNumber"
+import DungeonQuestCondition from "../../DungeonQuestCondition"
+import SceneTransPoint from "./SceneTransPoint"
 
-export default interface DungeonEntry extends Omit<SceneTransPoint, '$type'> {
-  $type: 'DungeonEntry'
+export default interface DungeonEntry extends Omit<SceneTransPoint, "$type"> {
+  $type: "DungeonEntry"
   DungeonIds: number[]
   DungeonQuestConditionList: DungeonQuestCondition
   Size: DynamicVector

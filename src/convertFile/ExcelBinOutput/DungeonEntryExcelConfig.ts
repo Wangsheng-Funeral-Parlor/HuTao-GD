@@ -1,11 +1,11 @@
-import DungeonEntryExcelConfigList from '$DT/ExcelBinOutput/DungeonEntryExcelConfig'
-import Reader from './reader'
+import DungeonEntryExcelConfigList from "$DT/ExcelBinOutput/DungeonEntryExcelConfig"
+import Reader from "./reader"
 
 export class DungeonEntryExcelConfigReader extends Reader {
   declare data: DungeonEntryExcelConfigList
 
   constructor(ver: string) {
-    super('DungeonEntryExcelConfigData', ver)
+    super("DungeonEntryExcelConfigData", ver)
   }
 }
 

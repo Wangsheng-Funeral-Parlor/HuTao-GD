@@ -1,18 +1,19 @@
-import ConfigMonster from '#/BinOutput/ConfigMonster'
-import MonsterAffixExcelConfig from '#/ExcelBinOutput/MonsterAffixExcelConfig'
-import MonsterDescribeExcelConfig from '#/ExcelBinOutput/MonsterDescribeExcelConfig'
-import MonsterExcelConfig from '#/ExcelBinOutput/MonsterExcelConfig'
-import MonsterMultiPlayerExcelConfig from '#/ExcelBinOutput/MonsterMultiPlayerExcelConfig'
-import MonsterSpecialNameExcelConfig from '#/ExcelBinOutput/MonsterSpecialNameExcelConfig'
-import Monster from '#/Text/Monster'
-import MonsterDataList from '$DT/MonsterData'
-import Writer from './writer'
+import ConfigMonster from "#/BinOutput/ConfigMonster"
+import MonsterAffixExcelConfig from "#/ExcelBinOutput/MonsterAffixExcelConfig"
+import MonsterDescribeExcelConfig from "#/ExcelBinOutput/MonsterDescribeExcelConfig"
+import MonsterExcelConfig from "#/ExcelBinOutput/MonsterExcelConfig"
+import MonsterMultiPlayerExcelConfig from "#/ExcelBinOutput/MonsterMultiPlayerExcelConfig"
+import MonsterSpecialNameExcelConfig from "#/ExcelBinOutput/MonsterSpecialNameExcelConfig"
+import Monster from "#/Text/Monster"
+import MonsterDataList from "$DT/MonsterData"
+import { getPathHash } from "@/utils/hash"
+import Writer from "./writer"
 
 export class MonsterDataWriter extends Writer {
   declare data: MonsterDataList
 
   constructor(ver: string) {
-    super('MonsterData', ver)
+    super("MonsterData", ver)
   }
 
   async generateData(): Promise<void> {
@@ -21,7 +22,7 @@ export class MonsterDataWriter extends Writer {
       Affix: [],
       Describe: [],
       MultiPlayer: [],
-      SpecialName: []
+      SpecialName: [],
     }
 
     const { data, version } = this
@@ -50,16 +51,8 @@ export class MonsterDataWriter extends Writer {
     const { data: monsterMultiPlayerExcelConfig } = monsterMultiPlayerExcelConfigLoader
     const { data: monsterSpecialNameExcelConfig } = monsterSpecialNameExcelConfigLoader
 
-    for (let monsterAffix of monsterAffixExcelConfig) {
-      const {
-        Id,
-        Affix,
-        Comment,
-        AbilityName,
-        IsLegal,
-        IsCommon,
-        PreAdd
-      } = monsterAffix
+    for (const monsterAffix of monsterAffixExcelConfig) {
+      const { Id, Affix, Comment, AbilityName, IsLegal, IsCommon, PreAdd } = monsterAffix
 
       data.Affix.push({
         Id,
@@ -68,55 +61,42 @@ export class MonsterDataWriter extends Writer {
         AbilityName,
         IsLegal: IsLegal != null && IsLegal.length > 0,
         IsCommon: !!IsCommon,
-        PreAdd: !!PreAdd
+        PreAdd: !!PreAdd,
       })
     }
 
-    for (let monsterDescribe of monsterDescribeExcelConfig) {
-      const {
-        Id,
-        TitleID,
-        SpecialNameLabID
-      } = monsterDescribe
+    for (const monsterDescribe of monsterDescribeExcelConfig) {
+      const { Id, TitleID, SpecialNameLabID } = monsterDescribe
 
       data.Describe.push({
         Id,
         TitleID,
-        SpecialNameLabID
+        SpecialNameLabID,
       })
     }
 
-    for (let monsterMultiPlayer of monsterMultiPlayerExcelConfig) {
-      const {
-        Id,
-        PropPer,
-        EndureNum,
-        ElementShield
-      } = monsterMultiPlayer
+    for (const monsterMultiPlayer of monsterMultiPlayerExcelConfig) {
+      const { Id, PropPer, EndureNum, ElementShield } = monsterMultiPlayer
 
       data.MultiPlayer.push({
         Id,
         PropPer,
         EndureNum,
-        ElementShield
+        ElementShield,
       })
     }
 
-    for (let monsterSpecialName of monsterSpecialNameExcelConfig) {
-      const {
-        SpecialNameID,
-        SpecialNameLabID,
-        IsInRandomList
-      } = monsterSpecialName
+    for (const monsterSpecialName of monsterSpecialNameExcelConfig) {
+      const { SpecialNameID, SpecialNameLabID, IsInRandomList } = monsterSpecialName
 
       data.SpecialName.push({
         Id: SpecialNameID,
         LabId: SpecialNameLabID,
-        IsInRandomList: !!IsInRandomList
+        IsInRandomList: !!IsInRandomList,
       })
     }
 
-    for (let monster of monsterExcelConfig) {
+    for (const monster of monsterExcelConfig) {
       const {
         MonsterName,
         Type,
@@ -155,11 +135,20 @@ export class MonsterDataWriter extends Writer {
         DescribeId,
         EntityBudgetLevel,
         SecurityLevel,
-        VisionLevel
+        VisionLevel,
       } = monster
 
-      const combatConfig = monsterTxt.find(m => parseInt(m.Id) === Id)?.CombatConfig?.replace(/^Config(Animal|Monster).*?_/, '')
-      const monsterConfig = configMonster[combatConfig] || configMonster[MonsterName.replace(/^(Animal|Monster).*?_/, '')]
+      const combatConfig = monsterTxt
+        .find((m) => parseInt(m.Id) === Id)
+        ?.CombatConfig?.replace(/^Config(Animal|Monster).*?_/, "")
+      const BossName = monsterDescribeExcelConfig.find((m) => m.Id === DescribeId)?.Icon.replace("UI_MonsterIcon_", "")
+
+      const monsterConfig =
+        configMonster[combatConfig] ||
+        configMonster[MonsterName] ||
+        configMonster[MonsterName.replace(/^(Animal|Monster).*?_/, "")] ||
+        configMonster[BossName] ||
+        configMonster[getPathHash(`Data/_BinOutput/Monster/Config${MonsterName}.MiHoYoBinData`)]
 
       data.Monster.push({
         Name: MonsterName,
@@ -200,7 +189,7 @@ export class MonsterDataWriter extends Writer {
         DescribeId,
         EntityBudgetLevel,
         SecurityLevel,
-        VisionLevel
+        VisionLevel,
       })
     }
   }

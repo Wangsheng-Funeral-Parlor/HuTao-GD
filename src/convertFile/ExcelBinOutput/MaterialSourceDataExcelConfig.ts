@@ -1,11 +1,11 @@
-import MaterialSourceDataExcelConfigList from '$DT/ExcelBinOutput/MaterialSourceDataExcelConfig'
-import Reader from './reader'
+import MaterialSourceDataExcelConfigList from "$DT/ExcelBinOutput/MaterialSourceDataExcelConfig"
+import Reader from "./reader"
 
 export class MaterialSourceDataExcelConfigReader extends Reader {
   declare data: MaterialSourceDataExcelConfigList
 
   constructor(ver: string) {
-    super('MaterialSourceDataExcelConfigData', ver)
+    super("MaterialSourceDataExcelConfigData", ver)
   }
 }
 

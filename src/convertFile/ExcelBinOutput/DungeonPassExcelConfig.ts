@@ -1,11 +1,11 @@
-import DungeonPassExcelConfigList from '$DT/ExcelBinOutput/DungeonPassExcelConfig'
-import Reader from './reader'
+import DungeonPassExcelConfigList from "$DT/ExcelBinOutput/DungeonPassExcelConfig"
+import Reader from "./reader"
 
 export class DungeonPassExcelConfigReader extends Reader {
   declare data: DungeonPassExcelConfigList
 
   constructor(ver: string) {
-    super('DungeonPassExcelConfigData', ver)
+    super("DungeonPassExcelConfigData", ver)
   }
 }
 

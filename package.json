@@ -1,19 +1,26 @@
 {
-  "name": "genshin-data",
+  "name": "Hutao-GD",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc --incremental && tsc-alias"
+    "build": "tsc --incremental && tsc-alias",
+    "lint-fix": "eslint --fix \"./src/**/*.ts\""
   },
-  "author": "NotArandomGUY",
+  "author": "kumadayo",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^17.0.31"
   },
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.49.0",
+    "@typescript-eslint/parser": "^5.49.0",
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "jsonc-parser": "^3.2.0",
-    "luaparse": "^0.3.1"
+    "luaparse": "^0.3.1",
+    "prettier": "^2.8.3"
   }
 }

@@ -1,20 +1,20 @@
-import ConfigGadget from '#/BinOutput/ConfigGadget'
-import GadgetExcelConfig from '#/ExcelBinOutput/GadgetExcelConfig'
-import GadgetPropExcelConfig from '#/ExcelBinOutput/GadgetPropExcelConfig'
-import GadgetDataList from '$DT/GadgetData'
-import Writer from './writer'
+import ConfigGadget from "#/BinOutput/ConfigGadget"
+import GadgetExcelConfig from "#/ExcelBinOutput/GadgetExcelConfig"
+import GadgetPropExcelConfig from "#/ExcelBinOutput/GadgetPropExcelConfig"
+import GadgetDataList from "$DT/GadgetData"
+import Writer from "./writer"
 
 export class GadgetDataWriter extends Writer {
   declare data: GadgetDataList
 
   constructor(ver: string) {
-    super('GadgetData', ver)
+    super("GadgetData", ver)
   }
 
   async generateData(): Promise<void> {
     this.data = {
       Gadget: [],
-      Prop: []
+      Prop: [],
     }
 
     const { data, version } = this
@@ -31,7 +31,7 @@ export class GadgetDataWriter extends Writer {
     const { data: gadgetExcelConfig } = gadgetExcelConfigLoader
     const { data: gadgetPropExcelConfig } = gadgetPropExcelConfigLoader
 
-    for (let gadget of gadgetExcelConfig) {
+    for (const gadget of gadgetExcelConfig) {
       const {
         Id,
         Tags,
@@ -57,10 +57,10 @@ export class GadgetDataWriter extends Writer {
         PrefabPathRemoteHashSuffix,
         PrefabPathRemoteHashPre,
         ControllerPathHashSuffix,
-        ControllerPathHashPre
+        ControllerPathHashPre,
       } = gadget
 
-      const gadgetConfig = Object.values(configGadget).find(config => config?.[JsonName] != null)?.[JsonName]
+      const gadgetConfig = Object.values(configGadget).find((config) => config?.[JsonName] != null)?.[JsonName]
 
       data.Gadget.push({
         Id,
@@ -92,20 +92,12 @@ export class GadgetDataWriter extends Writer {
         ControllerPathHashSuffix,
         ControllerPathHashPre,
 
-        Config: gadgetConfig
+        Config: gadgetConfig,
       })
     }
 
-    for (let gadgetProp of gadgetPropExcelConfig) {
-      const {
-        Id,
-        Hp,
-        Attack,
-        Defense,
-        HpCurve,
-        AttackCurve,
-        DefenseCurve
-      } = gadgetProp
+    for (const gadgetProp of gadgetPropExcelConfig) {
+      const { Id, Hp, Attack, Defense, HpCurve, AttackCurve, DefenseCurve } = gadgetProp
 
       data.Prop.push({
         Id,
@@ -114,7 +106,7 @@ export class GadgetDataWriter extends Writer {
         Defense: Defense || 0,
         HpCurve,
         AttackCurve,
-        DefenseCurve
+        DefenseCurve,
       })
     }
   }

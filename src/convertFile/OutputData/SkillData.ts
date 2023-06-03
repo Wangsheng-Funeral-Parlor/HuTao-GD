@@ -1,21 +1,21 @@
-import AvatarSkillDepotExcelConfig from '#/ExcelBinOutput/AvatarSkillDepotExcelConfig'
-import AvatarSkillExcelConfig from '#/ExcelBinOutput/AvatarSkillExcelConfig'
-import ProudSkillExcelConfig from '#/ExcelBinOutput/ProudSkillExcelConfig'
-import SkillDataGroup from '$DT/SkillData'
-import Writer from './writer'
+import AvatarSkillDepotExcelConfig from "#/ExcelBinOutput/AvatarSkillDepotExcelConfig"
+import AvatarSkillExcelConfig from "#/ExcelBinOutput/AvatarSkillExcelConfig"
+import ProudSkillExcelConfig from "#/ExcelBinOutput/ProudSkillExcelConfig"
+import SkillDataGroup from "$DT/SkillData"
+import Writer from "./writer"
 
 export class SkillDataWriter extends Writer {
   declare data: SkillDataGroup
 
   constructor(ver: string) {
-    super('SkillData', ver)
+    super("SkillData", ver)
   }
 
   async generateData(): Promise<void> {
     this.data = {
       Depot: [],
       Skill: [],
-      ProudSkill: []
+      ProudSkill: [],
     }
 
     const { version, data } = this
@@ -32,7 +32,7 @@ export class SkillDataWriter extends Writer {
     const { data: avatarSkillExcelConfig } = avatarSkillExcelConfigLoader
     const { data: proudSkillExcelConfig } = proudSkillExcelConfigLoader
 
-    for (let depot of avatarSkillDepotExcelConfig) {
+    for (const depot of avatarSkillDepotExcelConfig) {
       const {
         Id,
         Skills,
@@ -45,7 +45,7 @@ export class SkillDataWriter extends Writer {
 
         EnergySkill,
         LeaderTalent,
-        AttackModeSkill
+        AttackModeSkill,
       } = depot
 
       data.Depot.push({
@@ -60,11 +60,11 @@ export class SkillDataWriter extends Writer {
 
         EnergySkill,
         LeaderTalent,
-        AttackModeSkill
+        AttackModeSkill,
       })
     }
 
-    for (let skill of avatarSkillExcelConfig) {
+    for (const skill of avatarSkillExcelConfig) {
       const {
         Id,
         AbilityName,
@@ -85,7 +85,7 @@ export class SkillDataWriter extends Writer {
         DefaultLocked,
         NeedStore,
         CdSlot,
-        EnergyMin
+        EnergyMin,
       } = skill
 
       data.Skill.push({
@@ -108,11 +108,11 @@ export class SkillDataWriter extends Writer {
         DefaultLocked,
         NeedStore,
         CdSlot,
-        EnergyMin
+        EnergyMin,
       })
     }
 
-    for (let proudSkill of proudSkillExcelConfig) {
+    for (const proudSkill of proudSkillExcelConfig) {
       const {
         ProudSkillId,
         ProudSkillGroupId,
@@ -129,7 +129,7 @@ export class SkillDataWriter extends Writer {
         BreakLevel,
         LifeEffectType,
         CoinCost,
-        EffectiveForTeam
+        EffectiveForTeam,
       } = proudSkill
 
       data.ProudSkill.push({
@@ -148,7 +148,7 @@ export class SkillDataWriter extends Writer {
         BreakLevel,
         LifeEffectType,
         CoinCost,
-        EffectiveForTeam
+        EffectiveForTeam,
       })
     }
   }

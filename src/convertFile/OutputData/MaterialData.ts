@@ -1,12 +1,12 @@
-import MaterialExcelConfig from '#/ExcelBinOutput/MaterialExcelConfig'
-import MaterialDataList from '$DT/MaterialData'
-import Writer from './writer'
+import MaterialExcelConfig from "#/ExcelBinOutput/MaterialExcelConfig"
+import MaterialDataList from "$DT/MaterialData"
+import Writer from "./writer"
 
 export class MaterialDataWriter extends Writer {
   declare data: MaterialDataList
 
   constructor(ver: string) {
-    super('MaterialData', ver)
+    super("MaterialData", ver)
   }
 
   async generateData(): Promise<void> {
@@ -16,7 +16,7 @@ export class MaterialDataWriter extends Writer {
 
     await materialExcelConfigLoader.load()
 
-    this.data = materialExcelConfigLoader.data.map(material => ({
+    this.data = materialExcelConfigLoader.data.map((material) => ({
       ItemUse: material.ItemUse,
       SatiationParams: material.SatiationParams,
       DestroyReturnMaterial: material.DestroyReturnMaterial,
@@ -46,7 +46,7 @@ export class MaterialDataWriter extends Writer {
       FoodQuality: material.FoodQuality,
       GlobalItemLimit: material.GlobalItemLimit,
       CdTime: material.CdTime,
-      CdGroup: material.CdGroup
+      CdGroup: material.CdGroup,
     }))
   }
 }

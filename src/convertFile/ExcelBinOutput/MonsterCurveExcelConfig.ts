@@ -1,11 +1,11 @@
-import CurveExcelConfigList from '$DT/ExcelBinOutput/Common/CurveExcelConfig'
-import Reader from './reader'
+import CurveExcelConfigList from "$DT/ExcelBinOutput/Common/CurveExcelConfig"
+import Reader from "./reader"
 
 export class MonsterCurveExcelConfigReader extends Reader {
   declare data: CurveExcelConfigList
 
   constructor(ver: string) {
-    super('MonsterCurveExcelConfigData', ver)
+    super("MonsterCurveExcelConfigData", ver)
   }
 }
 

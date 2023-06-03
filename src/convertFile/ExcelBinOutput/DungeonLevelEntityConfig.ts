@@ -1,11 +1,11 @@
-import DungeonLevelEntityConfigList from '$DT/ExcelBinOutput/DungeonLevelEntityConfig'
-import Reader from './reader'
+import DungeonLevelEntityConfigList from "$DT/ExcelBinOutput/DungeonLevelEntityConfig"
+import Reader from "./reader"
 
 export class DungeonLevelEntityConfigReader extends Reader {
   declare data: DungeonLevelEntityConfigList
 
   constructor(ver: string) {
-    super('DungeonLevelEntityConfigData', ver)
+    super("DungeonLevelEntityConfigData", ver)
   }
 }
 

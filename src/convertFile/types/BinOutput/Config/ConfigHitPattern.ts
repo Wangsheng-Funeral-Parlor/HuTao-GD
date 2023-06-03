@@ -1,5 +1,5 @@
-import { DynamicFloat } from '$DT/BinOutput/Common/DynamicNumber'
-import ConfigHitImpulse from './ConfigHitImpulse'
+import { DynamicFloat } from "$DT/BinOutput/Common/DynamicNumber"
+import ConfigHitImpulse from "./ConfigHitImpulse"
 
 export default interface ConfigHitPattern {
   OnHitEffectName: string

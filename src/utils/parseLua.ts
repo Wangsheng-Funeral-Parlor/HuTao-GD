@@ -1,8 +1,12 @@
-import luaparse from 'luaparse'
-import { waitTick } from './asyncWait'
+import luaparse from "luaparse"
+import { waitTick } from "./asyncWait"
+import { GadgetStateEnum } from "$DT/Enum/GadgetState"
+import { EventTypeEnum } from "$DT/Enum/EventType"
 
 function isLuaArray(obj: any): boolean {
-  const keys = Object.keys(obj || {}).map(k => parseInt(k)).sort((a, b) => a - b)
+  const keys = Object.keys(obj || {})
+    .map((k) => parseInt(k))
+    .sort((a, b) => a - b)
   const len = keys.length
 
   for (let i = 0; i < len; i++) {
@@ -21,7 +25,7 @@ export interface LuaLabelStatement extends LuaObject {
   label: LuaIdentifier
 }
 
-export interface LuaBreakStatement extends LuaObject { }
+export type LuaBreakStatement = LuaObject
 
 export interface LuaGotoStatement extends LuaObject {
   label: LuaIdentifier
@@ -124,9 +128,9 @@ export interface LuaBooleanLiteral extends LuaLiteral {
   value: boolean
 }
 
-export interface LuaNilLiteral extends LuaLiteral { }
+export type LuaNilLiteral = LuaLiteral
 
-export interface LuaVarargLiteral extends LuaLiteral { }
+export type LuaVarargLiteral = LuaLiteral
 
 export interface LuaTableKey extends LuaObject {
   key: LuaObject
@@ -152,7 +156,7 @@ export interface LuaBinaryExpression extends LuaObject {
   right: LuaObject
 }
 
-export interface LuaLogicalExpression extends LuaBinaryExpression { }
+export type LuaLogicalExpression = LuaBinaryExpression
 
 export interface LuaUnaryExpression extends LuaObject {
   operator: string
@@ -209,7 +213,7 @@ export class VariableManager {
     return varMap[identifier] || parentVars?.get(identifier) || (isGlobal ? null : globalVars.get(identifier)) || null
   }
 
-  declare(identifier: string, local: boolean = false): Variable {
+  declare(identifier: string, local = false): Variable {
     const { isGlobal, globalVars, varMap } = this
     if (!isGlobal && !local) return globalVars.declare(identifier)
 
@@ -218,21 +222,30 @@ export class VariableManager {
     return varObj
   }
 
-  assign(identifier: string | LuaObject, init?: LuaObject, local: boolean = false) {
+  assign(identifier: string | LuaObject, init?: LuaObject, local = false) {
     let varObj: Variable
 
-    if (typeof identifier !== 'string') {
+    if (typeof identifier !== "string") {
       switch (identifier.type) {
-        case 'Identifier':
+        case "Identifier":
           identifier = <string>parseLuaObj(identifier, this, true)
           varObj = this.get(identifier) || this.declare(identifier, local)
           break
-        case 'MemberExpression':
-        case 'IndexExpression': {
-          const baseVarObj = this.get(parseLuaObj((<LuaMemberExpression | LuaIndexExpression>identifier).base, this, true))
+        case "MemberExpression":
+        case "IndexExpression": {
+          const baseVarObj = this.get(
+            parseLuaObj((<LuaMemberExpression | LuaIndexExpression>identifier).base, this, true)
+          )
           if (baseVarObj == null) break
-          identifier = parseLuaObj(identifier.type === 'MemberExpression' ? (<LuaMemberExpression>identifier).identifier : (<LuaIndexExpression>identifier).index, this, true)
-          varObj = baseVarObj.getMember(<string | number>identifier) || baseVarObj.declareMember(<string | number>identifier)
+          identifier = parseLuaObj(
+            identifier.type === "MemberExpression"
+              ? (<LuaMemberExpression>identifier).identifier
+              : (<LuaIndexExpression>identifier).index,
+            this,
+            true
+          )
+          varObj =
+            baseVarObj.getMember(<string | number>identifier) || baseVarObj.declareMember(<string | number>identifier)
           break
         }
         default:
@@ -242,7 +255,7 @@ export class VariableManager {
       varObj = this.get(identifier) || this.declare(identifier, local)
     }
 
-    if (!varObj) return console.log('[ERROR]', 'Cannot assign to undeclared variable:', identifier)
+    if (!varObj) return console.log("[ERROR]", "Cannot assign to undeclared variable:", identifier)
 
     // init var with value
     if (init) varObj.set(parseLuaObj(init, this))
@@ -251,10 +264,7 @@ export class VariableManager {
   }
 
   export() {
-    return Object.fromEntries(
-      Object.entries(this.varMap)
-        .map(e => [e[0], e[1].export()])
-    )
+    return Object.fromEntries(Object.entries(this.varMap).map((e) => [e[0], e[1].export()]))
   }
 }
 
@@ -276,7 +286,7 @@ export class Variable {
 
   getMember(identifier: string | number) {
     const value = this.get()
-    if (value == null || typeof value !== 'object') return null
+    if (value == null || typeof value !== "object") return null
     return value[identifier] || null
   }
 
@@ -288,10 +298,9 @@ export class Variable {
 
   export() {
     const value = this.get()
-    if (value == null || typeof value !== 'object') return value
+    if (value == null || typeof value !== "object") return value
     const obj = Object.fromEntries(
-      Object.entries(value as { [key: string | number]: Variable })
-        .map(e => [e[0], e[1].export()])
+      Object.entries(value as { [key: string | number]: Variable }).map((e) => [e[0], e[1].export()])
     )
     return isLuaArray(obj) ? Object.values(obj) : obj
   }
@@ -301,76 +310,76 @@ function parseLuaUnary(expression: LuaUnaryExpression, vars: VariableManager) {
   const { operator, argument } = expression
 
   switch (operator) {
-    case '-':
+    case "-":
       return -parseLuaObj(argument, vars)
-    case 'not':
+    case "not":
       return !parseLuaObj(argument, vars)
     default:
       return null
   }
 }
 
-function parseLuaObj(obj: LuaObject, vars: VariableManager, identifierAsKey: boolean = false): any {
+function parseLuaObj(obj: LuaObject, vars: VariableManager, identifierAsKey = false): any {
   switch (obj.type) {
-    case 'LocalStatement':
-    case 'AssignmentStatement': {
+    case "LocalStatement":
+    case "AssignmentStatement": {
       const { variables, init } = <LuaLocalStatement | LuaAssignmentStatement>obj
-      const isLocal = obj.type === 'LocalStatement'
+      const isLocal = obj.type === "LocalStatement"
       for (let i = 0; i < variables.length; i++) vars.assign(variables[i], init[i], isLocal)
       break
     }
-    case 'Chunk': {
+    case "Chunk": {
       parseLuaChunk(<LuaChunk>obj, vars)
       break
     }
-    case 'Identifier': {
+    case "Identifier": {
       const identifier = (<LuaIdentifier>obj).name
       return identifierAsKey ? identifier : vars.get(identifier)
     }
-    case 'StringLiteral': {
+    case "StringLiteral": {
       return (<LuaStringLiteral>obj).raw.slice(1, -1)
     }
-    case 'NumericLiteral': {
+    case "NumericLiteral": {
       return (<LuaNumericLiteral>obj).value
     }
-    case 'BooleanLiteral': {
+    case "BooleanLiteral": {
       return (<LuaBooleanLiteral>obj).value
     }
-    case 'NilLiteral': {
+    case "NilLiteral": {
       return null
     }
-    case 'TableKey': {
+    case "TableKey": {
       const varObj = new Variable()
       varObj.set(parseLuaObj((<LuaTableKey>obj).value, vars))
       return {
         isTableField: true,
         key: parseLuaObj((<LuaTableKey>obj).key, vars),
-        value: varObj
+        value: varObj,
       }
     }
-    case 'TableKeyString': {
+    case "TableKeyString": {
       const varObj = new Variable()
       varObj.set(parseLuaObj((<LuaTableKeyString>obj).value, vars))
       return {
         isTableField: true,
         key: (<LuaTableKeyString>obj).key?.name,
-        value: varObj
+        value: varObj,
       }
     }
-    case 'TableValue': {
+    case "TableValue": {
       const varObj = new Variable()
       varObj.set(parseLuaObj((<LuaTableValue>obj).value, vars))
       return {
         isTableField: true,
-        value: varObj
+        value: varObj,
       }
     }
-    case 'TableConstructorExpression': {
+    case "TableConstructorExpression": {
       const { fields } = <LuaTableConstructorExpression>obj
       const map = {}
 
       let i = 1
-      fields.forEach(field => {
+      fields.forEach((field) => {
         const fieldObj = parseLuaObj(field, vars)
         if (!fieldObj.isTableField) return
         const { key, value } = fieldObj
@@ -380,14 +389,25 @@ function parseLuaObj(obj: LuaObject, vars: VariableManager, identifierAsKey: boo
 
       return map
     }
-    case 'UnaryExpression': {
+    case "UnaryExpression": {
       return parseLuaUnary(<LuaUnaryExpression>obj, vars)
     }
-    case 'MemberExpression':
-    case 'IndexExpression': {
+    case "MemberExpression":
+    case "IndexExpression": {
       const baseVarObj = vars.get(parseLuaObj((<LuaMemberExpression | LuaIndexExpression>obj).base, vars, true))
-      if (baseVarObj == null) break
-      return baseVarObj.getMember(parseLuaObj(obj.type === 'MemberExpression' ? (<LuaMemberExpression>obj).identifier : (<LuaIndexExpression>obj).index, vars, true))
+      if (baseVarObj == null && (<LuaMemberExpression | LuaIndexExpression>obj).base["name"] == "GadgetState")
+        return GadgetStateEnum[obj["identifier"].name]
+      if (baseVarObj == null && (<LuaMemberExpression | LuaIndexExpression>obj).base["name"] == "EventType")
+        return EventTypeEnum[obj["identifier"].name]
+      if (baseVarObj == null) return
+
+      return baseVarObj.getMember(
+        parseLuaObj(
+          obj.type === "MemberExpression" ? (<LuaMemberExpression>obj).identifier : (<LuaIndexExpression>obj).index,
+          vars,
+          true
+        )
+      )
     }
   }
 
@@ -400,7 +420,7 @@ async function parseLuaBlock(body: LuaObject[], vars: VariableManager) {
   if (counter++ % 500 === 0) await waitTick()
 
   const localVars = new VariableManager(vars.globalVars, vars)
-  for (let obj of body) parseLuaObj(obj, localVars)
+  for (const obj of body) parseLuaObj(obj, localVars)
 }
 
 export async function parseLuaChunk(chunk: LuaChunk, vars: VariableManager) {

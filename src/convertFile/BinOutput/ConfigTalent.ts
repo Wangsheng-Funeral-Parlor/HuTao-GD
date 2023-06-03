@@ -1,11 +1,11 @@
-import ConfigTalent from '$DT/BinOutput/Config/ConfigTalent'
-import Reader from './reader'
+import ConfigTalent from "$DT/BinOutput/Config/ConfigTalent"
+import Reader from "./reader"
 
 export class ConfigTalentReader extends Reader {
   declare data: { [name: string]: ConfigTalent[] }
 
-  constructor(ver: string, extra: string = '') {
-    super('Talent' + extra, ver)
+  constructor(ver: string, extra = "") {
+    super("Talent" + extra, ver)
   }
 
   async loadDir(): Promise<void> {

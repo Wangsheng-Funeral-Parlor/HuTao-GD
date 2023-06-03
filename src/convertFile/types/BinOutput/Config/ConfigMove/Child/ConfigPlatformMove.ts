@@ -1,8 +1,8 @@
-import ConfigBaseMove from '.'
-import ConfigRoute from '../../ConfigRoute'
+import ConfigBaseMove from "."
+import ConfigRoute from "../../ConfigRoute"
 
 export default interface ConfigPlatformMove extends ConfigBaseMove {
-  $type: 'ConfigPlatformMove'
+  $type: "ConfigPlatformMove"
   AvatarTriggerEventDistance: number
   IsMovingWater: boolean
   Route: ConfigRoute

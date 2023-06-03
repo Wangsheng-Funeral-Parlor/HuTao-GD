@@ -8,3 +8,5 @@
 /output.json
 /OutputData
 /package-lock.json
+/**.code-workspace
+.DS_Store

@@ -1,11 +1,11 @@
-import FettersExcelConfigList from '$DT/ExcelBinOutput/FettersExcelConfig'
-import Reader from './reader'
+import FettersExcelConfigList from "$DT/ExcelBinOutput/FettersExcelConfig"
+import Reader from "./reader"
 
 export class FettersExcelConfigReader extends Reader {
   declare data: FettersExcelConfigList
 
   constructor(ver: string) {
-    super('FettersExcelConfigData', ver)
+    super("FettersExcelConfigData", ver)
   }
 }
 

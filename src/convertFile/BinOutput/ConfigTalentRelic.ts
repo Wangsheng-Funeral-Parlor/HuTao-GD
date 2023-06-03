@@ -1,8 +1,8 @@
-import { ConfigTalentReader } from './ConfigTalent'
+import { ConfigTalentReader } from "./ConfigTalent"
 
 export class ConfigTalentRelicReader extends ConfigTalentReader {
   constructor(ver: string) {
-    super(ver, '/RelicTalents')
+    super(ver, "/RelicTalents")
   }
 }
 

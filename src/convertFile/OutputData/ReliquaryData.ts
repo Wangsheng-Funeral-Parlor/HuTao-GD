@@ -1,16 +1,16 @@
-import ReliquaryAffixExcelConfig from '#/ExcelBinOutput/ReliquaryAffixExcelConfig'
-import ReliquaryExcelConfig from '#/ExcelBinOutput/ReliquaryExcelConfig'
-import ReliquaryLevelExcelConfig from '#/ExcelBinOutput/ReliquaryLevelExcelConfig'
-import ReliquaryMainPropExcelConfig from '#/ExcelBinOutput/ReliquaryMainPropExcelConfig'
-import ReliquarySetExcelConfig from '#/ExcelBinOutput/ReliquarySetExcelConfig'
-import ReliquaryDataGroup from '$DT/ReliquaryData'
-import Writer from './writer'
+import ReliquaryAffixExcelConfig from "#/ExcelBinOutput/ReliquaryAffixExcelConfig"
+import ReliquaryExcelConfig from "#/ExcelBinOutput/ReliquaryExcelConfig"
+import ReliquaryLevelExcelConfig from "#/ExcelBinOutput/ReliquaryLevelExcelConfig"
+import ReliquaryMainPropExcelConfig from "#/ExcelBinOutput/ReliquaryMainPropExcelConfig"
+import ReliquarySetExcelConfig from "#/ExcelBinOutput/ReliquarySetExcelConfig"
+import ReliquaryDataGroup from "$DT/ReliquaryData"
+import Writer from "./writer"
 
 export class ReliquaryDataWriter extends Writer {
   declare data: ReliquaryDataGroup
 
   constructor(ver: string) {
-    super('ReliquaryData', ver)
+    super("ReliquaryData", ver)
   }
 
   async generateData(): Promise<void> {
@@ -19,7 +19,7 @@ export class ReliquaryDataWriter extends Writer {
       MainProp: [],
       Affix: [],
       Level: [],
-      Set: []
+      Set: [],
     }
 
     const { data, version } = this
@@ -42,7 +42,7 @@ export class ReliquaryDataWriter extends Writer {
     const { data: reliquaryLevelExcelConfig } = reliquaryLevelExcelConfigLoader
     const { data: reliquarySetExcelConfig } = reliquarySetExcelConfigLoader
 
-    for (let reliquary of reliquaryExcelConfig) {
+    for (const reliquary of reliquaryExcelConfig) {
       const {
         EquipType,
         RankLevel,
@@ -63,7 +63,7 @@ export class ReliquaryDataWriter extends Writer {
         SetId,
         StoryId,
         DestroyRule,
-        Dropable
+        Dropable,
       } = reliquary
 
       data.Reliquary.push({
@@ -86,51 +86,40 @@ export class ReliquaryDataWriter extends Writer {
         SetId,
         StoryId,
         DestroyRule,
-        Dropable
+        Dropable,
       })
     }
 
-    for (let reliquaryMainProp of reliquaryMainPropExcelConfig) {
-      const {
-        Id,
-        PropDepotId,
-        PropType,
-        AffixName
-      } = reliquaryMainProp
+    for (const reliquaryMainProp of reliquaryMainPropExcelConfig) {
+      const { Id, PropDepotId, PropType, AffixName } = reliquaryMainProp
 
       data.MainProp.push({
         Id,
         PropDepotId,
         PropType,
-        AffixName
+        AffixName,
       })
     }
 
-    for (let reliquaryAffix of reliquaryAffixExcelConfig) {
-      const {
-        Id,
-        DepotId,
-        GroupId,
-        PropType,
-        PropValue
-      } = reliquaryAffix
+    for (const reliquaryAffix of reliquaryAffixExcelConfig) {
+      const { Id, DepotId, GroupId, PropType, PropValue } = reliquaryAffix
 
       data.Affix.push({
         Id,
         DepotId,
         GroupId,
         PropType,
-        PropValue
+        PropValue,
       })
     }
 
-    for (let reliquaryLevel of reliquaryLevelExcelConfig) {
+    for (const reliquaryLevel of reliquaryLevelExcelConfig) {
       const {
         Level,
         AddProps,
 
         Rank,
-        Exp
+        Exp,
       } = reliquaryLevel
 
       data.Level.push({
@@ -138,25 +127,19 @@ export class ReliquaryDataWriter extends Writer {
         AddProps,
 
         Rank,
-        Exp
+        Exp,
       })
     }
 
-    for (let reliquarySet of reliquarySetExcelConfig) {
-      const {
-        SetId,
-        SetNeedNum,
-        ContainsList,
-        EquipAffixId,
-        DisableFilter
-      } = reliquarySet
+    for (const reliquarySet of reliquarySetExcelConfig) {
+      const { SetId, SetNeedNum, ContainsList, EquipAffixId, DisableFilter } = reliquarySet
 
       data.Set.push({
         Id: SetId,
         SetNeedNum,
         ContainsList,
         EquipAffixId,
-        DisableFilter
+        DisableFilter,
       })
     }
   }

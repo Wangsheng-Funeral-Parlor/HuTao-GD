@@ -1,16 +1,16 @@
-import ConfigScene from '#/BinOutput/ConfigScene'
-import CityConfig from '#/ExcelBinOutput/CityConfig'
-import SceneExcelConfig from '#/ExcelBinOutput/SceneExcelConfig'
-import SceneTagConfig from '#/ExcelBinOutput/SceneTagConfig'
-import Scene from '#/Script/Scene'
-import SceneDataList from '$DT/SceneData'
-import Writer from './writer'
+import ConfigScene from "#/BinOutput/ConfigScene"
+import CityConfig from "#/ExcelBinOutput/CityConfig"
+import SceneExcelConfig from "#/ExcelBinOutput/SceneExcelConfig"
+import SceneTagConfig from "#/ExcelBinOutput/SceneTagConfig"
+import Scene from "#/Script/Scene"
+import SceneDataList from "$DT/SceneData"
+import Writer from "./writer"
 
 export class SceneDataWriter extends Writer {
   declare data: SceneDataList
 
   constructor(ver: string) {
-    super('SceneData', ver)
+    super("SceneData", ver)
   }
 
   async generateData(): Promise<void> {
@@ -36,7 +36,7 @@ export class SceneDataWriter extends Writer {
     const { data: configScene } = configSceneLoader
     const { data: sceneScript } = sceneScriptLoader
 
-    for (let scene of sceneExcelConfig) {
+    for (const scene of sceneExcelConfig) {
       const { Id, Type, SpecifiedAvatarList, MaxSpecifiedAvatarNum, IsMainScene, IsLocked } = scene
 
       if (sceneScript[Id] == null) continue
@@ -57,23 +57,29 @@ export class SceneDataWriter extends Writer {
         VisionAnchor,
         SpecifiedAvatarList: SpecifiedAvatarList || [],
         MaxSpecifiedAvatarNum: MaxSpecifiedAvatarNum || -1,
-        City: cityConfig.map(city => ({
+        City: cityConfig.map((city) => ({
           Id: city.CityId,
           AreaIdVec: city.AreaIdVec,
           MapPosX: city.MapPosX,
           MapPosY: city.MapPosY,
           AdventurePointId: city.AdventurePointId,
-          OpenState: city.OpenState
+          OpenState: city.OpenState,
         })),
         Config: configScene[Id],
-        Tag: sceneTagConfig.filter(tag => tag.SceneId === Id).map(tag => ({
-          Id: tag.Id,
-          Name: tag.SceneTagName,
-          Cond: tag.Cond.filter(cond => cond.CondType != null) as { CondType: string, Param1?: number, Param2?: number }[],
-          IsDefaultValid: !!tag.IsDefaultValid
-        })),
+        Tag: sceneTagConfig
+          .filter((tag) => tag.SceneId === Id)
+          .map((tag) => ({
+            Id: tag.Id,
+            Name: tag.SceneTagName,
+            Cond: tag.Cond.filter((cond) => cond.CondType != null) as {
+              CondType: string
+              Param1?: number
+              Param2?: number
+            }[],
+            IsDefaultValid: !!tag.IsDefaultValid,
+          })),
         Group: Group,
-        Block: Block
+        Block: Block,
       })
     }
   }

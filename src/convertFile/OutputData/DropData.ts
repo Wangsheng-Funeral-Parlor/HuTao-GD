@@ -1,27 +1,28 @@
-import ChestDrop from '#/Text/ChestDrop'
-import DropLeaf from '#/Text/DropLeaf'
-import DropSubfield from '#/Text/DropSubfield'
-import DropTree from '#/Text/DropTree'
-import EntityDropSubfield from '#/Text/EntityDropSubfield'
-import MonsterDrop from '#/Text/MonsterDrop'
-import DropDataGroup from '$DT/DropData'
-import Writer from './writer'
+import ChestDrop from "#/Text/ChestDrop"
+import DropLeaf from "#/Text/DropLeaf"
+import DropSubfield from "#/Text/DropSubfield"
+import DropTree from "#/Text/DropTree"
+import EntityDropSubfield from "#/Text/EntityDropSubfield"
+import MonsterDrop from "#/Text/MonsterDrop"
+import DropDataGroup from "$DT/DropData"
+import Writer from "./writer"
 
 export class DropDataWriter extends Writer {
   declare data: DropDataGroup
 
   constructor(ver: string) {
-    super('DropData', ver)
+    super("DropData", ver)
   }
 
-  async generateData(): Promise<void> { // NOSONAR I don't fucking care
+  async generateData(): Promise<void> {
+    // NOSONAR I don't fucking care
     this.data = {
       Subfield: [],
       Tree: [],
       Leaf: [],
       Entity: [],
       Chest: [],
-      Monster: []
+      Monster: [],
     }
 
     const { data, version } = this
@@ -48,30 +49,20 @@ export class DropDataWriter extends Writer {
     const { data: monsterDropTxt } = monsterDropTxtLoader
 
     for (const dropSubfield of dropSubfieldTxt) {
-      const {
-        Id,
-        MaxLevel,
-        DropId
-      } = dropSubfield
+      const { Id, MaxLevel, DropId } = dropSubfield
 
       data.Subfield.push({
         Id: parseInt(Id) || 0,
         MaxLevel: parseInt(MaxLevel) || 0,
-        DropId: parseInt(DropId) || 0
+        DropId: parseInt(DropId) || 0,
       })
     }
 
     for (const dropTree of dropTreeTxt) {
-      const {
-        DropId,
-        MinLevel,
-        MaxLevel,
-        Random,
-        Tier
-      } = dropTree
+      const { DropId, MinLevel, MaxLevel, Random, Tier } = dropTree
 
       const leafList = []
-      const leafEntries = Object.entries(dropTree).filter(e => e[0].match(/Leaf\d+(Id|Count|Weight)/))
+      const leafEntries = Object.entries(dropTree).filter((e) => e[0].match(/Leaf\d+(Id|Count|Weight)/))
 
       for (const leafEntry of leafEntries) {
         const index = (parseInt(leafEntry[0].match(/\d+/)?.[0]) || 0) - 1
@@ -88,20 +79,15 @@ export class DropDataWriter extends Writer {
         MaxLevel: parseInt(MaxLevel) || 0,
         Random: parseInt(Random) || 0,
         Tier: parseInt(Tier) || 0,
-        Leaf: leafList.filter(e => e.Id)
+        Leaf: leafList.filter((e) => e.Id),
       })
     }
 
     for (const dropLeaf of dropLeafTxt) {
-      const {
-        LeafId,
-        MinLevel,
-        MaxLevel,
-        Random
-      } = dropLeaf
+      const { LeafId, MinLevel, MaxLevel, Random } = dropLeaf
 
       const itemList = []
-      const itemEntries = Object.entries(dropLeaf).filter(e => e[0].match(/Item\d+(Id|Weight|Interval)/))
+      const itemEntries = Object.entries(dropLeaf).filter((e) => e[0].match(/Item\d+(Id|Weight|Interval)/))
 
       for (const itemEntry of itemEntries) {
         const index = (parseInt(itemEntry[0].match(/\d+/)?.[0]) || 0) - 1
@@ -117,19 +103,15 @@ export class DropDataWriter extends Writer {
         MinLevel: parseInt(MinLevel) || 0,
         MaxLevel: parseInt(MaxLevel) || 0,
         Random: parseInt(Random) || 0,
-        Item: itemList.filter(e => e.Id)
+        Item: itemList.filter((e) => e.Id),
       })
     }
 
     for (const entityDropSubfield of entityDropSubfieldTxt) {
-      const {
-        EntityId,
-        Type,
-        Limit
-      } = entityDropSubfield
+      const { EntityId, Type, Limit } = entityDropSubfield
 
       const branchList = []
-      const branchEntries = Object.entries(entityDropSubfield).filter(e => e[0].match(/Branch\d+(Type|SubfieldId)/))
+      const branchEntries = Object.entries(entityDropSubfield).filter((e) => e[0].match(/Branch\d+(Type|SubfieldId)/))
 
       for (const branchEntry of branchEntries) {
         const index = (parseInt(branchEntry[0].match(/\d+/)?.[0]) || 0) - 1
@@ -137,26 +119,19 @@ export class DropDataWriter extends Writer {
         if (index < 0 || key == null) continue
 
         branchList[index] = branchList[index] || {}
-        branchList[index][key] = key === 'Type' ? branchEntry[1] : (parseInt(branchEntry[1]) || 0)
+        branchList[index][key] = key === "Type" ? branchEntry[1] : parseInt(branchEntry[1]) || 0
       }
 
       data.Entity.push({
         EntityId: parseInt(EntityId) || 0,
         Type: parseInt(Type) || 0,
-        Branch: branchList.filter(e => e.Type),
-        Limit: parseInt(Limit) || 0
+        Branch: branchList.filter((e) => e.Type),
+        Limit: parseInt(Limit) || 0,
       })
     }
 
     for (const chestDrop of chestDropTxt) {
-      const {
-        MinLevel,
-        Index,
-        DropId,
-        DropCount,
-        SourceType,
-        Category
-      } = chestDrop
+      const { MinLevel, Index, DropId, DropCount, SourceType, Category } = chestDrop
 
       data.Chest.push({
         MinLevel: parseInt(MinLevel) || 0,
@@ -164,23 +139,18 @@ export class DropDataWriter extends Writer {
         DropId: parseInt(DropId) || 0,
         DropCount: parseInt(DropCount) || 0,
         SourceType: parseInt(SourceType) || 0,
-        Category
+        Category,
       })
     }
 
     for (const monsterDrop of monsterDropTxt) {
-      const {
-        MinLevel,
-        Index,
-        DropId,
-        DropCount
-      } = monsterDrop
+      const { MinLevel, Index, DropId, DropCount } = monsterDrop
 
       data.Monster.push({
         MinLevel: parseInt(MinLevel) || 0,
         Index,
         DropId: parseInt(DropId) || 0,
-        DropCount: parseInt(DropCount) || 0
+        DropCount: parseInt(DropCount) || 0,
       })
     }
   }

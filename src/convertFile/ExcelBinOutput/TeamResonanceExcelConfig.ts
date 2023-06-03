@@ -1,11 +1,11 @@
-import TeamResonanceExcelConfigList from '$DT/ExcelBinOutput/TeamResonanceExcelConfig'
-import Reader from './reader'
+import TeamResonanceExcelConfigList from "$DT/ExcelBinOutput/TeamResonanceExcelConfig"
+import Reader from "./reader"
 
 export class TeamResonanceExcelConfigReader extends Reader {
   declare data: TeamResonanceExcelConfigList
 
   constructor(ver: string) {
-    super('TeamResonanceExcelConfigData', ver)
+    super("TeamResonanceExcelConfigData", ver)
   }
 }
 

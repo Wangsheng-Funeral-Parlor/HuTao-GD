@@ -1,11 +1,11 @@
-import WeatherExcelConfigList from '$DT/ExcelBinOutput/WeatherExcelConfig'
-import Reader from './reader'
+import WeatherExcelConfigList from "$DT/ExcelBinOutput/WeatherExcelConfig"
+import Reader from "./reader"
 
 export class WeatherExcelConfigReader extends Reader {
   declare data: WeatherExcelConfigList
 
   constructor(ver: string) {
-    super('WeatherExcelConfigData', ver)
+    super("WeatherExcelConfigData", ver)
   }
 }
 
